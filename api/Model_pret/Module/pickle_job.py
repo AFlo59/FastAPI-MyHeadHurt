@@ -31,7 +31,7 @@ def charger_modele(nom_fichier):
     if not os.path.exists(chemin_dossier):
         print(f"Le dossier '{chemin_dossier}' n'existe pas. Aucun modèle trouvé.")
         return None
-    chemin_fichier = os.path.join(chemin_dossier, nom_fichier + ".pckl")
+    chemin_fichier = os.path.join(chemin_dossier, nom_fichier + ".pkl")
     if not os.path.exists(chemin_fichier):
         print(f"Le fichier '{chemin_fichier}' n'existe pas. Aucun modèle trouvé.")
         return None
