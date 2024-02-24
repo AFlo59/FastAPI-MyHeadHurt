@@ -1,50 +1,10 @@
 from django.shortcuts import render
-from .utils import mutliplicate_by_5
 from django.contrib.auth.decorators import login_required
-from .forms import CryptoApiForm, ModelApiForm
+from .forms import ModelApiForm
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
 import os
-
-@login_required
-def api_page(request):
-    url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest'
-
-    headers = {
-    'Accepts': 'application/json',
-    'X-CMC_PRO_API_KEY': os.getenv('API_KEY'),
-    }
-
-    session = Session()
-    session.headers.update(headers)
-
-        # if this is a POST request we need to process the form data
-    if request.method == "POST":
-        # create a form instance and populate it with data from the request:
-        form = CryptoApiForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            try :
-                response = session.get(url, params=form.cleaned_data)
-                data = json.loads(response.text)
-                print(form.cleaned_data)
-                form.save()
-                id_ = list(data['data'].keys())[0]
-                print(id_)
-                devise = form.cleaned_data['convert']
-                data = data['data'][id_]['quote'][devise]
-
-                return render(request, "main/api_page.html", context={'form':form, 'data': data, 'devise':devise})
-            except (ConnectionError, Timeout, TooManyRedirects, KeyError) as e:
-                return render(request, "main/api_page.html", context={'form':form, 'error':e})
-    else:
-        form = CryptoApiForm()
-
-    
-    return render(request, "main/api_page.html", context={'form':form})
-
-
 
 # Create your views here.
 def home_page(request):
@@ -60,8 +20,6 @@ def contact_page(request, test):
 @login_required
 def special_page(request):
     return render(request, "main/special_page.html")
-
-
 
 @login_required
 def predict_page(request):

@@ -1,7 +1,17 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.core import validators
 from django.core.validators import MinLengthValidator, MinValueValidator
-import forms
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
+
+def validate_date_format(value):
+    try:
+        # Try to parse the date using the specified format
+        datetime.datetime.strptime(value, '%d/%m/%Y')
+    except ValueError:
+        # If parsing fails, raise a validation error
+        raise ValidationError(_('Invalid date format. Date should be in the format DD/MM/YYYY.'), code='invalid_date_format')
 
 class User(AbstractUser):
     pass
@@ -107,7 +117,7 @@ class ModelApi(models.Model):
     Bank = models.CharField(max_length=100)
     BankState = models.CharField(max_length=2, choices=US_STATES)
     NAICS = models.CharField(max_length=10, choices=NAICS_CHOICES)
-    ApprovalDate = models.DateField(input_formats=['%d/%m/%Y'])
+    ApprovalDate = models.DateField(validators=[validate_date_format])
     ApprovalFY = models.IntegerField(choices=APPROVAL_YEAR_CHOICES)
     Term = models.IntegerField(validators=[MinValueValidator(1)])
     NoEmp = models.IntegerField(validators=[MinValueValidator(1)])
@@ -122,9 +132,11 @@ class ModelApi(models.Model):
     Franchise = models.BooleanField(choices=FRANCHISE_CHOICES)
 
 
-    def __init__(self, *args, **kwargs):
-        super(ModelApi, self).__init__(*args, **kwargs)
-        if self.NewExist:  # If NewExist is True (New)
-            self.fields['RetainedJob'].widget = forms.HiddenInput()  # Hide
-        else:  # If NewExist is False (Existing)
-            self.fields['RetainedJob'].widget = forms.TextInput()  # Show
+    # def __init__(self, *args, **kwargs):
+    #     super(ModelApi, self).__init__(*args, **kwargs)
+    #     if self.NewExist:  # If NewExist is True (New)
+    #         self.fields['RetainedJob'].widget = forms.HiddenInput()  # Hide
+    #     else:  # If NewExist is False (Existing)
+    #         self.fields['RetainedJob'].widget = forms.TextInput()  # Show
+
+
