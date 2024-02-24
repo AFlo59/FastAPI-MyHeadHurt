@@ -7,5 +7,5 @@ urlpatterns = [
     path('special/', views.special_page, name='special'),
     path('contact/<int:test>', views.contact_page, name='contact'),
     path('api/', views.api_page, name='api'),
-    path('api_predict/', views.api_predict_page, name='api-predict'),
+    path('predict/', views.predict_page, name='predict'),
 ]

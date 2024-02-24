@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.core.validators import MinLengthValidator
+from django.core.validators import MinLengthValidator, MinValueValidator
 import forms
 
 class User(AbstractUser):
@@ -109,16 +109,16 @@ class ModelApi(models.Model):
     NAICS = models.CharField(max_length=10, choices=NAICS_CHOICES)
     ApprovalDate = models.DateField(input_formats=['%d/%m/%Y'])
     ApprovalFY = models.IntegerField(choices=APPROVAL_YEAR_CHOICES)
-    Term = models.IntegerField(min_value=1)
-    NoEmp = models.IntegerField(min_value=1)
+    Term = models.IntegerField(validators=[MinValueValidator(1)])
+    NoEmp = models.IntegerField(validators=[MinValueValidator(1)])
     NewExist = models.BooleanField(choices=[(True, "New"), (False, "Existing")])
-    CreateJob = models.IntegerField(min_value=0)
-    RetainedJob = models.IntegerField(min_value=0)
+    CreateJob = models.IntegerField(validators=[MinValueValidator(0)])
+    RetainedJob = models.IntegerField(validators=[MinValueValidator(0)])
     UrbanRural = models.CharField(max_length=10, choices=URBAN_RURAL_CHOICES)
     RevLineCr = models.BooleanField(choices=REV_LINE_CR_CHOICES)
     LowDoc = models.BooleanField(choices=LOW_DOC_CHOICES)
-    GrAppv = models.IntegerField(min_value=0)
-    SBA_Appv = models.IntegerField(min_value=0)
+    GrAppv = models.IntegerField(validators=[MinValueValidator(0)])
+    SBA_Appv = models.IntegerField(validators=[MinValueValidator(0)])
     Franchise = models.BooleanField(choices=FRANCHISE_CHOICES)
 
 

@@ -64,7 +64,7 @@ def special_page(request):
 
 
 @login_required
-def api_predict_page(request):
+def predict_page(request):
     url = 'http://172.17.0.3:8001/predict'
 
     headers = {
@@ -88,10 +88,10 @@ def api_predict_page(request):
             form.save()
             print('ok')
 
-            return render(request, "main/api_predict_page.html", context={'form':form, 'data': data})
+            return render(request, "main/predict_page.html", context={'form':form, 'data': data})
 
     else:
         form = ModelApiForm()
 
     
-    return render(request, "main/api_predict_page.html", context={'form':form})
+    return render(request, "main/predict_page.html", context={'form':form})
