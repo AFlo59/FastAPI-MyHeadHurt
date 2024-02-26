@@ -8,10 +8,10 @@
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
 </head>
-<header class='bg-light_blue-400'>
+<header class='bg-light_blue'>
     <nav class='justify-between max-w-6xl mx-auto items-center px-6 h-16 text-base font-semibold hidden md:flex'>
-        <a href="{% url 'home' %}">
-            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="">
+        <a href=" {% url "home" %} ">
+        <img class="h-16 w-auto" src="{% static "/img/SBA-Logo.png" %}" alt="">
         </a>
 
         <div class="dropdown">
