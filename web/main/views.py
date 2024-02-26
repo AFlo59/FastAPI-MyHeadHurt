@@ -1,10 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from .forms import ModelApiForm
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
 import os
+
+def custom_logout(request):
+    logout(request)
+    return redirect(request.META.get('HTTP_REFERER', 'home'))
 
 # Create your views here.
 def home_page(request):
@@ -18,8 +23,8 @@ def contact_page(request, test):
     return render(request, 'main/contact_page.html', context=context)
 
 @login_required
-def special_page(request):
-    return render(request, "main/special_page.html")
+def profil_page(request):
+    return render(request, "main/profil_page.html")
 
 @login_required
 def predict_page(request):
