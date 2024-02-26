@@ -3,38 +3,46 @@
 {% url "special" as url_special %}
 {% url "func-list" as url_func %}
 {% url "api" as url_api %}
+{% url "home" as url_home %}
 
 <header class='bg-gray-300'>
     <nav class='justify-between max-w-6xl mx-auto items-center px-6 h-16 text-base font-semibold hidden md:flex'>
         <a href="{% url 'home' %}">
             <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="">
         </a>
-        
+
         <div class="dropdown">
             <!-- Bouton pour la connexion -->
-            <a id="login-btn" href="{% url 'login' %}" style="display: {% if user.is_authenticated %}none{% endif %}">Login</a>
+            <a id="login-btn" href="{% url 'login' %}" style="display: {% if user.is_authenticated %}none{% endif %}">
+                Login
+            </a>
             <!-- Bouton pour l'inscription -->
-            <a id="signup-btn" href="{% url 'signup' %}" style="display: {% if user.is_authenticated %}none{% endif %}">Signup</a>
-            <button id="user-btn" class="dropbtn">{{ user.get_username.capitalize }}
+            <a id="signup-btn" href="{% url 'signup' %}" style="display: {% if user.is_authenticated %}none{% endif %}">
+                Signup
+            </a>
+            <!-- Bouton avec le nom de l'utilisateur et le dropdown -->
+            <button onclick="toggleDropdown()" id="user-btn" class="dropbtn" style="display: {% if not user.is_authenticated %}none{% endif %}">
+                {{ user.get_username.capitalize }}
                 <i class="fa fa-caret-down"></i>
-              </button> 
-            <div class="dropdown-content">
+            </button> 
+            <div id="dropdown-content" class="dropdown-content" style="display: none;">
                 <a href="{% url 'profil' %}">Profile</a>
                 <a href="{% url 'custom_logout' %}">Logout</a>
             </div>
-          </div> 
+        </div>
+        
 
     </nav>
     <div class="navbar">
-        <a href="#home">Home</a>
-        <a href="#news">News</a>
+        <a href="{{ url_home }}">Home</a>
+        <a href="{{ url_news }}">News</a>
         <div class="dropdown">
           <button class="dropbtn">Business Guide
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <a href="{{ url_func }}" class="hover:text-blue-300 {% if request.path == url_func %}text-white{% endif %} ">
-                Link 1</a>
+            <a href="{{ url_func }}">
+                All you need to know !</a>
             <a href="#" class="hover:text-blue-300 {% if request.path == url_func %}text-white{% endif %} ">
                 Link 2</a>
           </div>
