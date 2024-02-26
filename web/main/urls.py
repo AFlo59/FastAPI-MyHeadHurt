@@ -8,4 +8,5 @@ urlpatterns = [
     path('contact/<int:test>', views.contact_page, name='contact'),
     path('predict/', views.predict_page, name='predict'),
     path('logout/', views.custom_logout, name='custom_logout'),
+    path('news/', views.news_page, name='news'),
 ]

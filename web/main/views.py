@@ -7,11 +7,13 @@ from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
 import os
 
+def news_page(request):
+    return render(request, 'main/news_page.html')
+
 def custom_logout(request):
     logout(request)
     return redirect(request.META.get('HTTP_REFERER', 'home'))
 
-# Create your views here.
 def home_page(request):
     return render(request, 'main/home_page.html')
 

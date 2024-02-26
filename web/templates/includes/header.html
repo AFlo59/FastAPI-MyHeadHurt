@@ -4,6 +4,7 @@
 {% url "func-list" as url_func %}
 {% url "api" as url_api %}
 {% url "home" as url_home %}
+{% url "news" as url_news %}
 
 <header class='bg-light_blue-400'>
     <nav class='justify-between max-w-6xl mx-auto items-center px-6 h-16 text-base font-semibold hidden md:flex'>
@@ -42,11 +43,26 @@
           </button>
           <div class="dropdown-content">
             <a href="{{ url_func }}">
-                All you need to know !</a>
+                Entrepreneurship Essentials</a>
             <a href="#" class="hover:text-blue-300 {% if request.path == url_func %}text-white{% endif %} ">
-                Link 2</a>
+                Legal and Compliance Information</a>
+            <a href="#" class="hover:text-blue-300 {% if request.path == url_func %}text-white{% endif %} ">
+                Resources</a>
           </div>
-        </div> 
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">SBA Funding
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="{{ url_func }}">
+                    SBA Loan: Check Your Eligibility</a>
+                <a href="#" class="hover:text-blue-300 {% if request.path == url_func %}text-white{% endif %} ">
+                    SBA Approved Partners</a>
+            </div>
+            
+          </div> 
       </div>
+      
     <script src="{% static 'js/header.js' %}"></script>
 </header>
