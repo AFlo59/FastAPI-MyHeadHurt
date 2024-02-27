@@ -6,6 +6,8 @@ from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
 import os
+from django.contrib.auth.forms import AuthenticationForm
+
 
 def news_page(request):
     return render(request, 'main/news_page.html')
