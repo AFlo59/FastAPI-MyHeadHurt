@@ -1,13 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
-
-
+{% url "predict" as url_predict %}
 {% block content %}
+<head> 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-...etc..." crossorigin="anonymous">
+</head>
 
-<div class="mx-auto align-middle flex flex-col h-dvh items-center ">
-    <h1 class="font-bold mt-20 text-3xl">SBA</h1>
-    <h2 class="font-light mt-1">My Head Hurts</h2>
-</div>
-
-<p class="text-red-800">Ma page d'accueil</p>
+<section>
+    <div class="centered-div">
+         <h1 class="font-bold mt-20 text-3xl">Small Business Administration</h1>
+         <p>Bienvenue ! Vous êtes une petite entreprise et souhaitez obtenir un prêt professionnel pour lancer votre activité ? La SBA peut vous aider dans l'obtention de votre prêt !</p>
+         <button><a href="{% url 'predict' %}">Démarrer une simulation</a></button>
+    </div>
+    <p class="text-red-800">La SBA est désormais présente sur les réseaux sociaux. Suivez nous !</p>
+    <div class="reseaux">
+        <a href="https://www.linkedin.com/in/votre-profil-linkedin" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://twitter.com/votre-profil-twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+    </div>
+</section>
 {% endblock content %}
