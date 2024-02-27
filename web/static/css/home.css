@@ -39,7 +39,6 @@
     position: relative; /* Assure que les éléments enfants sont positionnés relativement */
     z-index: 1; /* Assure que les éléments enfants sont au-dessus du pseudo-élément */
 }
-
 .centered-div h1,.centered-div p {
     color: white; /* Couleur blanche pour le texte */
 }
