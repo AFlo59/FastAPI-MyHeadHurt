@@ -4,14 +4,26 @@ from django.core import validators
 from django.core.validators import MinLengthValidator, MinValueValidator
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+import datetime
+from django import forms
+from django.forms.widgets import TextInput
 
+class DateInput(TextInput):
+    input_type = 'date'
+
+    def __init__(self, attrs=None):
+        default_attrs = {'type': self.input_type, 'pattern': '[0-9]{2}/[0-9]{2}/[0-9]{2}', 'placeholder': 'DD/MM/YY'}
+        if attrs:
+            default_attrs.update(attrs)
+        super().__init__(default_attrs)
+        
 def validate_date_format(value):
     try:
         # Try to parse the date using the specified format
-        datetime.datetime.strptime(value, '%d/%m/%Y')
+        datetime.datetime.strptime(value, '%d/%m/%y')
     except ValueError:
         # If parsing fails, raise a validation error
-        raise ValidationError(_('Invalid date format. Date should be in the format DD/MM/YYYY.'), code='invalid_date_format')
+        raise ValidationError(_('Invalid date format. Date should be in the format DD/MM/YY.'), code='invalid_date_format')
 
 class User(AbstractUser):
     pass
@@ -123,7 +135,7 @@ class ModelApi(models.Model):
     NoEmp = models.IntegerField(validators=[MinValueValidator(1)])
     NewExist = models.BooleanField(choices=[(True, "New"), (False, "Existing")])
     CreateJob = models.IntegerField(validators=[MinValueValidator(0)])
-    RetainedJob = models.IntegerField(validators=[MinValueValidator(0)])
+    RetainedJob = models.IntegerField(validators=[MinValueValidator(0)], blank=True, null=True)
     UrbanRural = models.CharField(max_length=10, choices=URBAN_RURAL_CHOICES)
     RevLineCr = models.BooleanField(choices=REV_LINE_CR_CHOICES)
     LowDoc = models.BooleanField(choices=LOW_DOC_CHOICES)
