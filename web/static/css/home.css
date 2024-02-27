@@ -43,12 +43,18 @@
 .centered-div h1,.centered-div p {
     color: white; /* Couleur blanche pour le texte */
 }
-
+.centered-div p {
+    color: white; /* Couleur blanche pour le texte */
+    line-height: 1.5; /* Espacement entre les lignes */
+    display: flex; /* Utilisation de flexbox */
+    text-align: center;
+}
 .centered-div h1 {
     color: white; /* Couleur blanche pour le texte */
     font-weight: bold; /* Texte en gras */
     margin-top: 20px; /* Marge supérieure de 20 pixels */
     font-size: 3rem; /* Taille de la police 3xl */
+    line-height: 1.25; /* Espacement entre les lignes */
 }
 
 .centered-div button {
