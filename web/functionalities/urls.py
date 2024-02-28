@@ -1,8 +1,11 @@
-from django.urls import path
-from functionalities import views
+from django.shortcuts import render
+from .models import Functionalities
+from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from accounts.models import CustomUser
 
 urlpatterns = [
-    path('list/', views.FunctionalitiesListView.as_view(), name="func-list"),
-    path('<int:pk>/', views.FunctionalitiesDetailView.as_view(), name="func-detail"),
-    path('signup/', views.SignupView.as_view(), name="signup")
+    
 ]
