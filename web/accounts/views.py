@@ -1,22 +1,23 @@
-from django.contrib.auth import views as auth_views
-from django.views import generic
-from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
+from .models import CustomUser
 
-from .forms import LoginForm, RegisterForm
+class UserCreationFormCustom(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = CustomUser
 
-
-class LoginView(auth_views.LoginView):
-    form_class = LoginForm
-    template_name = 'accounts/login.html'
-
-
-class RegisterView(generic.CreateView):
-    form_class = RegisterForm
-    template_name = 'accounts/register.html'
+class SignUpView(CreateView):
+    form_class = UserCreationFormCustom
     success_url = reverse_lazy('login')
+    template_name = 'registration/signup.html'
 
-
-def accounts_page(request, username):
-    # Assuming you have a template named username.html
+@login_required
+def username_page(request, username):
     return render(request, 'accounts/username.html', {'username': username})
+
+@login_required
+def profil_page(request):
+    return render(request, "accounts/profil_page.html")

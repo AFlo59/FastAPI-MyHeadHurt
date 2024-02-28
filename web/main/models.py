@@ -1,22 +1,11 @@
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.utils.translation import gettext_lazy as _
 from django.core.validators import MinValueValidator
+from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
-import datetime
-from django import forms
 from django.forms.widgets import TextInput
+import datetime
 
-class CustomUser(AbstractUser):
-    email = models.EmailField(_('email address'), unique=True)
-
-class UserProfile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    # Add additional fields here as needed
-    # For example:
-    # bio = models.TextField()
-    # avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
 class DateInput(TextInput):
     input_type = 'date'
 
@@ -89,25 +78,25 @@ class ModelApi(models.Model):
     ]
 
     NAICS_CHOICES = [
-    ("11", "Agriculture, forestry, fishing and hunting"),
-    ("21", "Mining, quarrying, and oil and gas extraction"),
-    ("22", "Utilities"),
-    ("23", "Construction"),
-    ("31-33", "Manufacturing"),  
-    ("42", "Wholesale trade"),
-    ("44-45", "Retail trade"),  
-    ("48-49", "Transportation and warehousing"), 
-    ("51", "Information"),
-    ("52", "Finance and insurance"),
-    ("53", "Real estate and rental and leasing"),
-    ("54", "Professional, scientific, and technical services"),
-    ("55", "Management of companies and enterprises"),
-    ("56", "Administrative and support and waste management and remediation services"),
-    ("61", "Educational services"),
-    ("62", "Health care and social assistance"),
-    ("71", "Arts, entertainment, and recreation"),
-    ("72", "Accommodation and food services"),
-    ("81", "Other services (except public administration) 92 Public administration"),
+        ("11", "Agriculture, forestry, fishing and hunting"),
+        ("21", "Mining, quarrying, and oil and gas extraction"),
+        ("22", "Utilities"),
+        ("23", "Construction"),
+        ("31-33", "Manufacturing"),  
+        ("42", "Wholesale trade"),
+        ("44-45", "Retail trade"),  
+        ("48-49", "Transportation and warehousing"), 
+        ("51", "Information"),
+        ("52", "Finance and insurance"),
+        ("53", "Real estate and rental and leasing"),
+        ("54", "Professional, scientific, and technical services"),
+        ("55", "Management of companies and enterprises"),
+        ("56", "Administrative and support and waste management and remediation services"),
+        ("61", "Educational services"),
+        ("62", "Health care and social assistance"),
+        ("71", "Arts, entertainment, and recreation"),
+        ("72", "Accommodation and food services"),
+        ("81", "Other services (except public administration) 92 Public administration"),
     ]
     
     URBAN_RURAL_CHOICES = [
@@ -149,11 +138,4 @@ class ModelApi(models.Model):
     SBA_Appv = models.IntegerField(validators=[MinValueValidator(0)])
     Franchise = models.BooleanField(choices=FRANCHISE_CHOICES)
 
-
-    # def __init__(self, *args, **kwargs):
-    #     super(ModelApi, self).__init__(*args, **kwargs)
-    #     if self.NewExist:  # If NewExist is True (New)
-    #         self.fields['RetainedJob'].widget = forms.HiddenInput()  # Hide
-    #     else:  # If NewExist is False (Existing)
-    #         self.fields['RetainedJob'].widget = forms.TextInput()  # Show
-
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

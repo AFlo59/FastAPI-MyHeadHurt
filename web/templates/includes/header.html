@@ -20,9 +20,10 @@
                 Login
             </a>
             <!-- Bouton pour l'inscription -->
-            <a id="signup-btn" href="{% url 'signup' %}" style="display: {% if user.is_authenticated %}none{% endif %}">
+            <a id="signup-btn" href="{% url 'accounts:signup' %}" style="display: {% if user.is_authenticated %}none{% endif %}">
                 Signup
             </a>
+            
             <!-- Bouton avec le nom de l'utilisateur et le dropdown -->
             <button onclick="toggleDropdown()" id="user-btn" class="dropbtn" style="display: {% if not user.is_authenticated %}none{% endif %}">
                 {{ user.get_username.capitalize }}
