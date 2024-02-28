@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "livereload",
     "django.contrib.staticfiles",
     "accounts",
+    "main",
     "functionalities",
     'widget_tweaks',
 ]
