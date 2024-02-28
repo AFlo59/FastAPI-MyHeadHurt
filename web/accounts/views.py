@@ -1,8 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from django.contrib.auth import logout
 from .models import CustomUser
 
 class UserCreationFormCustom(UserCreationForm):
@@ -21,3 +22,7 @@ def username_page(request, username):
 @login_required
 def profil_page(request):
     return render(request, "accounts/profil_page.html")
+
+def custom_logout(request):
+    logout(request)
+    return redirect(request.META.get('HTTP_REFERER', 'home'))

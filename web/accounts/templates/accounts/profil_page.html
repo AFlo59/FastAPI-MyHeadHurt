@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/profil.css' %}">
 </head>
 <!-- Navbar top -->
- <div class="navbar-top">
+<div class="navbar-top">
     <div class="title">
         <h1>Profile</h1>
     </div>
@@ -16,7 +16,7 @@
             <a href="#message">
                 <span class="icon-count">{{ message_count|default:"0" }}</span>
                 <i class="fa fa-envelope fa-2x"></i>
-            </a>            
+            </a>
         </li>
         <li>
             <a href="#notification">
@@ -40,10 +40,10 @@
         <img src="https://imdezcode.files.wordpress.com/2020/02/imdezcode-logo.png" alt="" width="100" height="100">
 
         <div class="name">
-            {{User.Name}}
+            {{ user.name }}
         </div>
         <div class="job">
-            {{User.Job}}
+            {{ user.job }}
         </div>
     </div>
 
@@ -71,32 +71,32 @@
                     <tr>
                         <td>Name</td>
                         <td>:</td>
-                        <td>{{User.Name|default:"Jan Doe"}}</td>
+                        <td>{{ user.name|default:"Jan Doe" }}</td>
                     </tr>
                     <tr>
                         <td>Email</td>
                         <td>:</td>
-                        <td>{{User.Email|default:"JanDoe@google.com"}}</td>
+                        <td>{{ user.email|default:"JanDoe@google.com" }}</td>
                     </tr>
                     <tr>
                         <td>Address</td>
                         <td>:</td>
-                        <td>{{User.Address|default:"12 lost avenue alabama"}}</td>
+                        <td>{{ user.address|default:"12 lost avenue alabama" }}</td>
                     </tr>
                     <tr>
                         <td>Hobbies</td>
                         <td>:</td>
-                        <td>{{User.Hobbies|default:"nothing"}}</td>
+                        <td>{{ user.hobbies|default:"nothing" }}</td>
                     </tr>
                     <tr>
                         <td>Job</td>
                         <td>:</td>
-                        <td>{{User.Job|default:"unemployed"}}</td>
+                        <td>{{ user.job|default:"unemployed" }}</td>
                     </tr>
                     <tr>
                         <td>Skill</td>
                         <td>:</td>
-                        <td>{{User.Skill|default:"unskilled"}}</td>
+                        <td>{{ user.skill|default:"unskilled" }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -108,34 +108,7 @@
         <div class="card-body">
             <i class="fa fa-pen fa-xs edit"></i>
             <div class="social-media">
-                <span class="fa-stack fa-sm">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
-                </span>
-                <span class="fa-stack fa-sm">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                </span>
-                <span class="fa-stack fa-sm">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
-                </span>
-                <span class="fa-stack fa-sm">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fab fa-invision fa-stack-1x fa-inverse"></i>
-                </span>
-                <span class="fa-stack fa-sm">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                </span>
-                <span class="fa-stack fa-sm">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fab fa-whatsapp fa-stack-1x fa-inverse"></i>
-                </span>
-                <span class="fa-stack fa-sm">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fab fa-snapchat fa-stack-1x fa-inverse"></i>
-                </span>
+                <!-- Add your social media links/icons here -->
             </div>
         </div>
     </div>
