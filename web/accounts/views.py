@@ -14,3 +14,5 @@ class RegisterView(generic.CreateView):
     form_class = RegisterForm
     template_name = 'accounts/register.html'
     success_url = reverse_lazy('login')
+
+def accounts_page(request, username):
