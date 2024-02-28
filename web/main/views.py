@@ -12,10 +12,6 @@ from django.contrib.auth.forms import AuthenticationForm
 def news_page(request):
     return render(request, 'main/news_page.html')
 
-def custom_logout(request):
-    logout(request)
-    return redirect(request.META.get('HTTP_REFERER', 'home'))
-
 def home_page(request):
     return render(request, 'main/home_page.html')
 
