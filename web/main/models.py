@@ -1,13 +1,22 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.core import validators
-from django.core.validators import MinLengthValidator, MinValueValidator
-from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from django.core.validators import MinValueValidator
+from django.core.exceptions import ValidationError
 import datetime
 from django import forms
 from django.forms.widgets import TextInput
 
+class CustomUser(AbstractUser):
+    email = models.EmailField(_('email address'), unique=True)
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # Add additional fields here as needed
+    # For example:
+    # bio = models.TextField()
+    # avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
 class DateInput(TextInput):
     input_type = 'date'
 
@@ -24,9 +33,6 @@ def validate_date_format(value):
     except ValueError:
         # If parsing fails, raise a validation error
         raise ValidationError(_('Invalid date format. Date should be in the format DD/MM/YY.'), code='invalid_date_format')
-
-class User(AbstractUser):
-    pass
 
 class ModelApi(models.Model):
     US_STATES = [
@@ -150,3 +156,4 @@ class ModelApi(models.Model):
     #         self.fields['RetainedJob'].widget = forms.HiddenInput()  # Hide
     #     else:  # If NewExist is False (Existing)
     #         self.fields['RetainedJob'].widget = forms.TextInput()  # Show
+
