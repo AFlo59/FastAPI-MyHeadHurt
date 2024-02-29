@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<head>
+    <!-- Ajoutez ici les balises <link> pour vos feuilles de style CSS si nécessaire -->
+</head>
+<section>
+    <!-- Contenu de la page d'inscription -->
+    <div class="container">
+        <h2>Inscription</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">S'inscrire</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

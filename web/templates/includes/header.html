@@ -20,7 +20,7 @@
                 Login
             </a>
             <!-- Bouton pour l'inscription -->
-            <a id="signup-btn" href="{% url 'accounts:signup' %}" style="display: {% if user.is_authenticated %}none{% endif %}">
+            <a id="signup-btn" href="{% url 'accounts:register' %}" style="display: {% if user.is_authenticated %}none{% endif %}">
                 Signup
             </a>
             
@@ -30,9 +30,14 @@
                 <i class="fa fa-caret-down"></i>
             </button> 
             <div id="dropdown-content" class="dropdown-content" style="display: none;">
-                <a href="{% url 'accounts:profil' %}">Profile</a>
-                <a href="{% url 'accounts:custom_logout' %}">Logout</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'accounts:username' user.username %}">Profile</a>
+                    <a href="{% url 'accounts:custom_logout' %}">Logout</a>
+
+
+                {% endif %}
             </div>
+            
         </div>
         
 

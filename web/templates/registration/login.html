@@ -13,7 +13,7 @@
                 <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                     <a href="#">
                         <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
-                        Flowbite    
+                        Small Business Administration  
                     </a>
                     <div class="w-full bg-form-bg rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -23,8 +23,8 @@
                             <form class="space-y-4 md:space-y-6" method="post" action="{% url 'login' %}">
                                 {% csrf_token %}
                                 <div>
-                                    <label for="email" class="block mb-2 text-sm font-medium text-email-color dark:text-white">Your email</label>
-                                    {{form.email|add_class:"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"|attr:"placeholder:name@company.com"}}
+                                    <label for="username" class="block mb-2 text-sm font-medium text-email-color dark:text-white">Your username/email</label>
+                                    {{form.username|add_class:"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"|attr:"placeholder:name@company.com"}}
                                 </div>
                                 <div>
                                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
@@ -33,7 +33,7 @@
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-start">
                                         <div class="flex items-center h-5">
-                                          <input id="remember" aria-describedby="remember" type="checkbox" class="checkbox" required="">
+                                          <input id="remember" aria-describedby="remember" type="checkbox" class="checkbox">
                                         </div>
                                         <div class="ml-3 text-sm">
                                           <label for="remember" class="text-checkbox-color dark:text-gray-300">Remember me</label>
@@ -43,7 +43,7 @@
                                 </div>
                                 <button type="submit" class="submit-button">Sign in</button>
                                 <p class="text-sm font-light text-sign-up-color dark:text-gray-400">
-                                    Don’t have an account yet? <a href="{% url 'accounts:signup' %}" class="text-sign-up-link-color hover:underline dark:text-primary-500">Sign up</a>
+                                    Don’t have an account yet? <a href="{% url 'accounts:register' %}" class="text-sign-up-link-color hover:underline dark:text-primary-500">Sign up</a>
                                 </p>
                             </form>
                         </div>
