@@ -43,10 +43,10 @@ def predict_page(request):
             form.save()
             print('ok')
 
-            return render(request, "main/predict_page.html", context={'form':form, 'data': data})
+            return render(request, "functionalities/predict_page.html", context={'form':form, 'data': data})
 
     else:
         form = ModelApiForm()
 
     
-    return render(request, "main/predict_page.html", context={'form':form})
+    return render(request, "functionalities/predict_page.html", context={'form':form})
