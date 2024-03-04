@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import ModelApi
-
+from functionalities.models import ModelApi
 # Register your models here.
 admin.site.register(ModelApi)

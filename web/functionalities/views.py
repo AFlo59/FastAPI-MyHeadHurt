@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required  # Import login_required decorator
-from main.forms import ModelApiForm  # Import your ModelApiForm
+from .forms import ModelApiForm  # Import your ModelApiForm
 import json
 from requests import Session
 

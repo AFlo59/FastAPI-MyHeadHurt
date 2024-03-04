@@ -1,12 +1,4 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
-from .forms import ModelApiForm
-from requests import Request, Session
-from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
-import json
-import os
-from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import render
 
 
 def news_page(request):
