@@ -14,22 +14,50 @@
             <h2 class="h1">Register</h2>
             <div class="form-group form1">
                 <label for="email" class="input1">Email:</label>
-                {{form.email}}
+                {{ form.email }}
+                {% for error in form.email.errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
             </div>
             <div class="form-group form1">
                 <label for="username" class="input1">Username:</label>
-                {{form.username}}
+                {{ form.username }}
+                {% for error in form.username.errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
             </div>
             <div class="form-group form1">
                 <label for="password1" class="input1">Password:</label>
-                {{form.password1}}
+                {{ form.password1 }}
+                {% for error in form.password1.errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
             </div>
             <div class="form-group form1">
                 <label for="password2" class="input1">Confirm Password:</label>
-                {{form.password2}}
+                {{ form.password2 }}
+                {% for error in form.password2.errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
             </div>
+            {% for error in form.non_field_errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
             <button type="submit" class="submit-button">Register</button>
         </form>
+        {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {% if existing_user %}
+          {% if not existing_user.is_active %}
+            <p class="div9">An account with the same username and email already exists but is not active.</p>
+            <a href="{% url 'accounts:sendmail' uidb64='your_uidb64_here' token='your_token_here' %}" class="link2">Resend Activation Email</a>
+          {% endif %}
+        {% endif %}
         <p class="div9">Already have an account? <a href="{% url 'login' %}" class="link2">Login here</a></p>
     </div>
 </body>
