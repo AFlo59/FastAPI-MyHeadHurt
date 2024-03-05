@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.forms.widgets import TextInput
 from django.core.validators import RegexValidator
+from django.utils import timezone
 import datetime
 
 user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -16,24 +17,6 @@ class Functionalities(models.Model):
     def __str__(self):
         return f'{self.name} : {self.description}'
     
-
-class DateInput(TextInput):
-    input_type = 'date'
-
-    def __init__(self, attrs=None):
-        default_attrs = {'type': self.input_type, 'pattern': '[0-9]{2}/[0-9]{2}/[0-9]{2}', 'placeholder': 'DD/MM/YY'}
-        if attrs:
-            default_attrs.update(attrs)
-        super().__init__(default_attrs)
-        
-def validate_date_format(value):
-    try:
-        # Try to parse the date using the specified format
-        datetime.datetime.strptime(value, '%d/%m/%y')
-    except ValueError:
-        # If parsing fails, raise a validation error
-        raise ValidationError(_('Invalid date format. Date should be in the format DD/MM/YY.'), code='invalid_date_format')
-
 class ModelApi(models.Model):
     US_STATES = [
         ("AL", "Alabama"),
@@ -128,19 +111,12 @@ class ModelApi(models.Model):
         (1, "Yes"),
     ]
 
-    APPROVAL_YEAR_CHOICES = [(year, str(year)) for year in range(1950, 2025)]
-    validate_date_format = RegexValidator(
-    regex=r'^\d{4}-\d{2}-\d{2}$',
-    message='Date must be in the format YYYY-MM-DD'
-)
 
     City = models.CharField(max_length=100)
     State = models.CharField(max_length=2, choices=US_STATES)
     Bank = models.CharField(max_length=100)
     BankState = models.CharField(max_length=2, choices=US_STATES)
     NAICS = models.CharField(max_length=10, choices=NAICS_CHOICES)
-    ApprovalDate = models.CharField(max_length=10, validators=[validate_date_format])
-    ApprovalFY = models.IntegerField(choices=APPROVAL_YEAR_CHOICES)
     Term = models.IntegerField(validators=[MinValueValidator(1)])
     NoEmp = models.IntegerField(validators=[MinValueValidator(1)])
     NewExist = models.BooleanField(choices=[(True, "New"), (False, "Existing")])

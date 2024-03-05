@@ -1,19 +1,7 @@
 from django import forms
 from .models import *
 
-
-class DateInput(forms.DateInput):
-    input_type = 'date'
-
-    def __init__(self, attrs=None):
-        default_attrs = {'type': self.input_type, 'pattern': '[0-9]{2}/[0-9]{2}/[0-9]{2}', 'placeholder': 'DD/MM/YY'}
-        if attrs:
-            default_attrs.update(attrs)
-        super().__init__(default_attrs)
-
 class ModelApiForm(forms.ModelForm):
-    ApprovalDate = forms.DateField(label='Veuillez entrer la date SBA commitment issued', widget=DateInput())
-
     class Meta:
         model = ModelApi
         fields = "__all__"
@@ -23,7 +11,6 @@ class ModelApiForm(forms.ModelForm):
             'Bank': 'Veuillez indiquer le nom de la banque',
             'BankState': 'Veuillez indiquer l\'état de la banque',
             'NAICS': 'Veuillez indiquer la catégorie NAICS',
-            'ApprovalFY': 'Veuillez indiquer l\'année fiscale d\'engagement',
             'Term': 'Veuillez indiquer la durée du prêt en mois',
             'NoEmp': 'Veuillez indiquer le nombre d\'employés de l\'entreprise',
             'NewExist': 'Veuillez indiquer si l\'entreprise existe déjà',
