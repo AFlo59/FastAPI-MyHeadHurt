@@ -18,11 +18,3 @@ class EmailBackend(ModelBackend):
             return user
         return None
         
-class ConsoleEmailBackend(BaseEmailBackend):
-    def send_messages(self, email_messages):
-        for message in email_messages:
-            print("To:", message.to)
-            print("Subject:", message.subject)
-            print("Body:", message.body)
-            print("----")
-        return len(email_messages)
