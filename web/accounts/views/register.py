@@ -1,66 +1,20 @@
 import os
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponse
-from django.contrib.auth.tokens import default_token_generator
-from django.utils.encoding import force_bytes
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
-from django.contrib.auth import views as auth_views
-from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, View
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import get_user_model
 from django.contrib import messages
-from .forms import RegisterForm
-from .models import CustomUser
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.sites.shortcuts import get_current_site
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy, reverse
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.views.generic import CreateView
 from mailjet_rest import Client
 
-
-UserModel = get_user_model()  # No argument needed
-
-class LoginView(auth_views.LoginView):
-    form_class = AuthenticationForm
-    template_name = 'registration/login.html'
-
-@login_required
-def username_page(request, username):
-    return render(request, 'registration/username.html', {'username': username})
-
-@login_required
-def custom_logout(request):
-    logout(request)
-    return redirect(request.META.get('HTTP_REFERER', 'home'))
-class ResendActivationEmailView(View):
-    def get(self, request, *args, **kwargs):
-        uidb64 = kwargs.get('uidb64')
-        token = kwargs.get('token')
-        user = get_object_or_404(CustomUser, pk=uidb64)
-
-        if default_token_generator.check_token(user, token):
-            # Send activation email
-            RegisterView().send_confirmation_email(user)
-            return HttpResponse("Activation email has been resent successfully.")
-        else:
-            return HttpResponse("Invalid activation token.")
-
-    def post(self, request, *args, **kwargs):
-        # Handle POST requests here
-        # Example code to handle POST request and resend activation email
-        uidb64 = request.POST.get('uidb64')
-        token = request.POST.get('token')
-        user = get_object_or_404(CustomUser, pk=uidb64)
-
-        if default_token_generator.check_token(user, token):
-            # Send activation email
-            RegisterView().send_confirmation_email(user)
-            return HttpResponse("Activation email has been resent successfully.")
-        else:
-            return HttpResponse("Invalid activation token.")
+from accounts.forms import RegisterForm
+from accounts.models import CustomUser
 
 class RegisterView(CreateView):
     form_class = RegisterForm
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
 
     def form_valid(self, form):
@@ -128,29 +82,9 @@ class RegisterView(CreateView):
         api_secret = os.getenv('MAILJET_SECRET_KEY')
         mailjet = Client(auth=(api_key, api_secret), version='v3.1')
         mailjet.send.create(data=data)
-
-    def get_activation_link(self, user):
-        # Construct the activation link
-        uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
-        token = default_token_generator.make_token(user)
-        return reverse('accounts:validate_email', kwargs={'uidb64': uidb64, 'token': token})
-
+        
     def get_success_url(self):
         # Set is_active to True before redirection
         self.object.is_active = True
         self.object.save()
         return reverse_lazy('accounts:username', kwargs={'username': self.object.username})
-class ValidateEmailView(View):
-    def get(self, request, uidb64, token):
-        try:
-            uid = str(urlsafe_base64_decode(uidb64), 'utf-8')
-            user = UserModel.objects.get(pk=uid)
-
-            if default_token_generator.check_token(user, token):
-                user.is_active = True
-                user.save()
-                return redirect('account_activation_success')
-            else:
-                return render(request, 'registration/activation_link_invalid.html')
-        except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
-            return render(request, 'registration/activation_link_invalid.html')

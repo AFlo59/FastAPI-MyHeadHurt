@@ -4,6 +4,7 @@ from django.core.validators import MinValueValidator
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.forms.widgets import TextInput
+from django.core.validators import RegexValidator
 import datetime
 
 user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -128,13 +129,17 @@ class ModelApi(models.Model):
     ]
 
     APPROVAL_YEAR_CHOICES = [(year, str(year)) for year in range(1950, 2025)]
+    validate_date_format = RegexValidator(
+    regex=r'^\d{4}-\d{2}-\d{2}$',
+    message='Date must be in the format YYYY-MM-DD'
+)
 
     City = models.CharField(max_length=100)
     State = models.CharField(max_length=2, choices=US_STATES)
     Bank = models.CharField(max_length=100)
     BankState = models.CharField(max_length=2, choices=US_STATES)
     NAICS = models.CharField(max_length=10, choices=NAICS_CHOICES)
-    ApprovalDate = models.DateField(validators=[validate_date_format])
+    ApprovalDate = models.CharField(max_length=10, validators=[validate_date_format])
     ApprovalFY = models.IntegerField(choices=APPROVAL_YEAR_CHOICES)
     Term = models.IntegerField(validators=[MinValueValidator(1)])
     NoEmp = models.IntegerField(validators=[MinValueValidator(1)])
