@@ -9,6 +9,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        midnight: {
+          DEFAULT: '#0c2850',
+        },
         light_blue: {
           DEFAULT: '#b8dbd9',
           100: '#1b3634',
