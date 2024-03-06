@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 {% load widget_tweaks %}
-
+{% block head_extrascripts %}
+<title>Register</title>
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock head_extrascripts %}
 {% block content %}
-<head>
-    <title>Register</title>
-    <link rel="stylesheet" href="{% static 'css/register.css' %}">
-</head>
-<body>
     <div class="container sect">
         <form method="post" class="div1">
             {% csrf_token %}
@@ -60,5 +58,4 @@
         {% endif %}
         <p class="div9">Already have an account? <a href="{% url 'login' %}" class="link2">Login here</a></p>
     </div>
-</body>
 {% endblock content %}
