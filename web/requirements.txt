@@ -5,4 +5,4 @@ django-widget-tweaks<2
 requests<3
 psycopg2-binary<3
 tailwindcss
-mailjet_rest # or the version you need
+mailjet-rest<6.4.0

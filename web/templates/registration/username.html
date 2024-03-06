@@ -1,12 +1,17 @@
-{% extends "base.html" %}
-{% load static %}
-{% load widget_tweaks %}
+{% extends 'base.html' %}
 
 {% block content %}
-<head>
-    <title>Profil</title>
-</head>
-<body>
-    your profil
-</body>
-{% endblock content %}
+  <h1>{{ username }}'s Profile</h1>
+
+  <p>Email: {{ user.email }}</p>
+  <p>Phone Number: {{ user.phone_number }}</p>
+  <p>First Name: {{ user.first_name }}</p>
+  <p>Last Name: {{ user.last_name }}</p>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Changes</button>
+  </form>
+
+{% endblock %}
