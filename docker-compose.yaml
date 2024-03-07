@@ -11,7 +11,7 @@ services:
       context: ./web/
       dockerfile: Dockerfile
     volumes:
-      -.web/:/app/
+      -./web/:/app/
   postgres_db:
     image: postgres 
     restart : always

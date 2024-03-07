@@ -1,184 +1,37 @@
-:root {
-    --sect: bg-primary-bg dark:bg-secondary-bg;
+section {
+  width: 100%;
+  display: flex; /* Utilisation de flexbox */
+}
+/* Chaque div à l'intérieur de la section occupe 50% de la largeur */
+.Signin-container,
+.background-container {
+  width: 50%;
 }
 
-.container {
-    background: var(--sect);
+/* Empêche les éléments d'être empilés verticalement */
+.Signin-container,
+.background-container {
+  flex: 1; /* Chaque div occupe 50% de la section */
+  display: inline-block; /* Affichage en ligne */
 }
 
-.div1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 6px;
-    margin: 0 auto;
+/* Ajoutez l'image de fond à la div background-container */
+.background-container {
+  position: relative; /* Positionnement relatif pour l'image de fond */
 }
 
-@media (min-width: 768px) {
-    .div1 {
-        height: 100vh;
-    }
+/* Assurez-vous que la figure occupe 100% de la largeur et de la hauteur de la div */
+.background-container figure {
+  margin: 0; /* Supprime les marges */
+  padding: 0; /* Supprime les rembourrages */
+  width: 100%;
+  height: 100%;
 }
 
-@media (min-width: 1024px) {
-    .div1 {
-        padding-bottom: 0;
-    }
-}
+/* Style supplémentaire pour l'image */
+.background-container figure img {
+  width: 100%; /* Assurez-vous que l'image occupe toute la largeur */
+  height: 100%; /* Assurez-vous que l'image occupe toute la hauteur */
+  object-fit: cover; /* Remplissez l'espace disponible sans déformation */
 
-.logo1 {
-    width: 8px;
-    height: 8px;
-    margin-right: 2px;
-}
-
-.div2 {
-    width: 100%;
-    background-color: var(--form-bg);
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--dark-border);
-    margin-top: 0;
-    max-width: 24rem;
-    padding-left: 0;
-}
-
-.dark-mode .div2 {
-    background-color: #2d3748;
-    border-color: #4a5568;
-}
-
-.div3 {
-    padding: 1.5rem;
-    margin-top: 1rem;
-}
-
-@media (min-width: 640px) {
-    .div3 {
-        padding-top: 1.5rem;
-    }
-}
-
-@media (min-width: 768px) {
-    .div3 {
-        padding-top: 2rem;
-    }
-}
-
-.h1 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.025em;
-    color: #333;
-}
-
-@media (min-width: 768px) {
-    .h1 {
-        font-size: 1.5rem;
-    }
-}
-
-.dark .h1 {
-    color: #fff;
-}
-
-.form1 {
-    margin-bottom: 1rem;
-}
-
-@media (min-width: 768px) {
-    .form1 {
-        margin-bottom: 1.5rem;
-    }
-}
-
-.input1,
-.input2 {
-    margin-bottom: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #333333;
-}
-
-.dark .input1,
-.dark .input2 {
-    color: #FFFFFF;
-}
-
-.div4 {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.div5 {
-    display: flex;
-    align-items: flex-start;
-}
-
-.div6 {
-    display: flex;
-    align-items: center;
-    height: 1.25rem;
-}
-
-.div7 {
-    margin-left: 0.75rem;
-    font-size: 0.875rem;
-}
-
-.div8 {
-    color: #4B5563;
-}
-
-@media (prefers-color-scheme: dark) {
-    .div8 {
-        color: #CBD5E0;
-    }
-}
-
-.link1 {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #93C5FD;
-    text-decoration: none;
-}
-
-.link1:hover {
-    text-decoration: underline;
-}
-
-@media (prefers-color-scheme: dark) {
-    .link1 {
-        color: #3B82F6;
-    }
-}
-
-.div9 {
-    font-size: 0.875rem;
-    font-weight: 300;
-    color: #4B5563;
-}
-
-@media (prefers-color-scheme: dark) {
-    .div9 {
-        color: #CBD5E0;
-    }
-}
-
-.link2 {
-    color: #3182CE;
-    text-decoration: none;
-}
-
-.link2:hover {
-    text-decoration: underline;
-}
-
-@media (prefers-color-scheme: dark) {
-    .link2 {
-        color: #93C5FD;
-    }
 }

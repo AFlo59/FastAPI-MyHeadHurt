@@ -1,12 +1,44 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
-{% load widget_tweaks %}
+
+{% block head_extrascripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+{% endblock head_extrascripts %}
 
 {% block content %}
-<head>
-    <title>Profil</title>
-</head>
-<body>
-    Your Profile
-</body>
-{% endblock content %}
+<section>
+  <div id="profile-info">
+    <p>Email: {{ user.email }}</p>
+    <p>Phone Number: {{ user.phone_number }}</p>
+    <p>First Name: {{ user.first_name }}</p>
+    <p>Last Name: {{ user.last_name }}</p>
+    <p>Date of birth: {{ user.date_of_birth }}</p>
+    <button id="modify-btn">modify</button>
+  </div>
+  <div id="profile-form" style="display: none;">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  $(document).ready(function() {
+    $('#modify-btn').click(function() {
+      $('#profile-info').hide();
+      $('#profile-form').show();
+    });
+
+    $('#profile-form form').submit(function(event) {
+      // Ne pas empêcher le formulaire de se soumettre par défaut
+      // event.preventDefault();
+
+      // Une fois le formulaire soumis avec succès, la page sera redirigée vers la page de profil mise à jour
+    });
+  });
+</script>
+{% endblock extra_scripts %}
