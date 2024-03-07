@@ -10,7 +10,11 @@
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    margin-right: 10px; /* Ajoutez de l'espace entre les boutons */
   }
+  .navbar a i {
+    margin-right: 5px; /* Ajoutez de l'espace entre l'icône et le texte */
+}
   
 .dropdown {
     float: left;

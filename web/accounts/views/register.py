@@ -5,6 +5,8 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 from accounts.forms import RegisterForm
 from accounts.models import CustomUser
@@ -14,6 +16,11 @@ class RegisterView(CreateView):
     form_class = RegisterForm
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('home')
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         # Check if email or username is already in use
