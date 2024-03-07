@@ -52,3 +52,6 @@ class UserUpdateForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+class ForgotPasswordForm(forms.Form):
+    email = forms.EmailField(label='Email', max_length=254, widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email'}))
