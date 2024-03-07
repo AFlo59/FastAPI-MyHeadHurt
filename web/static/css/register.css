@@ -1,7 +1,10 @@
+
+/* Assurez-vous que la section occupe tout l'espace disponible */
 section {
   width: 100%;
   display: flex; /* Utilisation de flexbox */
 }
+
 /* Chaque div à l'intérieur de la section occupe 50% de la largeur */
 .Signin-container,
 .background-container {
@@ -33,5 +36,4 @@ section {
   width: 100%; /* Assurez-vous que l'image occupe toute la largeur */
   height: 100%; /* Assurez-vous que l'image occupe toute la hauteur */
   object-fit: cover; /* Remplissez l'espace disponible sans déformation */
-
 }
