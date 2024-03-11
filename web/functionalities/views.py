@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required  # Import login_required decorator
 from .forms import ModelApiForm  # Import your ModelApiForm
 import json
+import os
 from requests import Session
 
 
@@ -20,7 +21,7 @@ class FunctionalitiesDetailView(DetailView):
 
 @login_required
 def predict_page(request):
-    url = 'http://172.17.0.3:8001/predict'
+    url = os.getenv('API_URL')
 
     headers = {
     'Accepts': 'application/json',
