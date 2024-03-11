@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render
 from .models import Functionalities
 from django.views.generic import ListView, DetailView, CreateView
@@ -20,33 +21,39 @@ class FunctionalitiesDetailView(DetailView):
 
 @login_required
 def predict_page(request):
-    url = 'http://172.17.0.3:8001/predict'
+    url = os.environ.get('URL_API')
 
     headers = {
-    'Accepts': 'application/json',
+        'Accepts': 'application/json',
     }
 
     session = Session()
     session.headers.update(headers)
 
-        # if this is a POST request we need to process the form data
+    # Vérifie si l'utilisateur est connecté
+    if request.user.is_authenticated:
+        # Récupère les informations de l'utilisateur connecté
+        user_info = {
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
+            'email': request.user.email,
+            'date_of_birth': request.user.date_of_birth,
+            'phone_number': request.user.phone_number,
+        }
+        # Crée une instance de formulaire pré-remplie avec les informations de l'utilisateur
+        form = ModelApiForm(initial=user_info)
+    else:
+        form = ModelApiForm()
+
+    # Si la requête est POST, traite les données du formulaire
     if request.method == "POST":
-        # create a form instance and populate it with data from the request:
         form = ModelApiForm(request.POST)
-        # check whether it's valid:
         if form.is_valid():
-            print(form.cleaned_data)
-            
             features = json.dumps(form.cleaned_data)
             response = session.post(url, data=features)
             data = json.loads(response.text)
             form.save()
             print('ok')
+            return render(request, "functionalities/predict_page.html", context={'form': form, 'data': data})
 
-            return render(request, "functionalities/predict_page.html", context={'form':form, 'data': data})
-
-    else:
-        form = ModelApiForm()
-
-    
-    return render(request, "functionalities/predict_page.html", context={'form':form})
+    return render(request, "functionalities/predict_page.html", context={'form': form})

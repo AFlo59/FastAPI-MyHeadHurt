@@ -1,0 +1,82 @@
+apiVersion: '2019-12-01'
+location: francecentral
+name: SBAloan
+properties:
+  containers:
+    - name: postgresdb
+      properties:
+        image: postgres
+        resources:
+          requests:
+            cpu: 1
+            memoryInGb: 1
+        ports:
+          - port: 5432
+        environmentVariables:
+          - name: POSTGRES_DB
+            value: demo_db
+          - name: POSTGRES_PASSWORD
+            value: 123
+          - name: POSTGRES_USER
+            value: myuser
+          - name: POSTGRES_HOST
+            value: postgresdb
+          - name: POSTGRES_PORT
+            value: 5432
+    - name: web
+      properties:
+        image: j30v/django_2024 
+        resources:
+          requests:
+            cpu: 1
+            memoryInGb: 1.5
+        ports:
+          - port: 80
+        environmentVariables:
+          - name: SECRET_KEY
+            value: xpsem#f)o1((obu#5rha^kq%74yz0ktc-#j3!)dd(lc^uyfq0(
+          - name: URL_API
+            value: http://localhost:8002/predict
+          - name: DEBUG
+            value: "0"
+          - name: POSTGRES_DB
+            value: demo_db
+          - name: API_KEY
+            value: 5868b07c-0ef4-4e79-8f9e-4e0d65847a20
+          - name: MAILJET_API_KEY
+            value: 8ad62f34dab16cfcacd28b1ce8595cb9
+          - name: MAILJET_SECRET_KEY
+            value: 03bf41c9cbc6e57cd4e2d88f370625e0
+          - name: MAILJET_SENDER
+            value: etudessup59230@gmail.com
+          - name: POSTGRES_PASSWORD
+            value: "123"
+          - name: POSTGRES_USER
+            value: myuser
+          - name: POSTGRES_HOST
+            value: localhost
+          - name: POSTGRES_PORT
+            value: 5432
+          - name: POSTGRES_RDY
+            value: 1
+          - name: SENDGRID_API_KEY
+            value: ----
+    - name: api
+      properties:
+        image: j30v/api_2024 
+        resources:
+          requests:
+            cpu: 1
+            memoryInGb: 1.5
+        ports:
+          - port: 8002
+
+  osType: Linux
+  ipAddress:
+    type: Public
+    ports:
+      - protocol: tcp
+        port: 80  # Adapter en fonction des besoins de votre application
+
+tags: null
+type: Microsoft.ContainerInstance/containerGroups

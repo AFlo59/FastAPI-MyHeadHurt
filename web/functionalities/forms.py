@@ -26,6 +26,9 @@ class ModelApiForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ModelApiForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-field'})
+
         new_exist_value = self.initial.get('NewExist', None) if self.instance else None
         
         # If NewExist is Existing, set RetainedJob field to 0 and hide it
