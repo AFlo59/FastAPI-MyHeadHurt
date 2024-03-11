@@ -16,7 +16,7 @@ class ModelApiForm(forms.ModelForm):
         'NewExist': 'Please indicate if the business already exists',
         'CreateJob': 'Please indicate the number of jobs created',
         'RetainedJob': 'Please indicate the number of jobs retained',
-        'FranchiseCode': 'Please indicate if the business is a franchise',
+        'Franchise': 'Please indicate if the business is a franchise',
         'UrbanRural': 'Please indicate the type of area',
         'RevLineCr': 'Please indicate if there is a revolving line of credit',
         'LowDoc': 'Please indicate if the loan is a LowDoc Loan',
