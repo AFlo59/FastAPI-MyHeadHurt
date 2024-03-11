@@ -6,23 +6,23 @@ class ModelApiForm(forms.ModelForm):
         model = ModelApi
         fields = "__all__"
         labels = {
-            'City': 'Veuillez indiquer la ville de l\'emprunteur',
-            'State': 'Veuillez indiquer l\'état de l\'emprunteur',
-            'Bank': 'Veuillez indiquer le nom de la banque',
-            'BankState': 'Veuillez indiquer l\'état de la banque',
-            'NAICS': 'Veuillez indiquer la catégorie NAICS',
-            'Term': 'Veuillez indiquer la durée du prêt en mois',
-            'NoEmp': 'Veuillez indiquer le nombre d\'employés de l\'entreprise',
-            'NewExist': 'Veuillez indiquer si l\'entreprise existe déjà',
-            'CreateJob': 'Veuillez indiquer le nombre d\'emplois créés',
-            'RetainedJob': 'Veuillez indiquer le nombre d\'emplois maintenus',
-            'FranchiseCode': 'Veuillez indiquer si l\'entreprise est franchisée',
-            'UrbanRural': 'Veuillez indiquer le type de zone',
-            'RevLineCr': 'Veuillez indiquer s\'il existe une ligne de crédit renouvelable',
-            'LowDoc': 'Veuillez indiquer si le prêt est un LowDoc Loan',
-            'GrAppv': 'Veuillez indiquer le montant brut du prêt approuvé par la banque',
-            'SBA_Appv': 'Veuillez indiquer le montant approuvé garanti par la SBA',
-        }
+        'City': 'Please indicate the borrower\'s city',
+        'State': 'Please indicate the borrower\'s state',
+        'Bank': 'Please indicate the bank\'s name',
+        'BankState': 'Please indicate the bank\'s state',
+        'NAICS': 'Please indicate the NAICS category',
+        'Term': 'Please indicate the loan term in months',
+        'NoEmp': 'Please indicate the number of employees of the business',
+        'NewExist': 'Please indicate if the business already exists',
+        'CreateJob': 'Please indicate the number of jobs created',
+        'RetainedJob': 'Please indicate the number of jobs retained',
+        'FranchiseCode': 'Please indicate if the business is a franchise',
+        'UrbanRural': 'Please indicate the type of area',
+        'RevLineCr': 'Please indicate if there is a revolving line of credit',
+        'LowDoc': 'Please indicate if the loan is a LowDoc Loan',
+        'GrAppv': 'Please indicate the gross amount of the loan approved by the bank',
+        'SBA_Appv': 'Please indicate the amount guaranteed approved by the SBA',
+    }
 
     def __init__(self, *args, **kwargs):
         super(ModelApiForm, self).__init__(*args, **kwargs)

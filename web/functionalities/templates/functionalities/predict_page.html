@@ -4,7 +4,7 @@
 {% load static widget_tweaks %}
 
 {% block head_extrascripts %}
-<title>Formulaire de Prédiction</title>
+<title>Loan Application Form</title>
 <style>
      
 
@@ -43,8 +43,11 @@
 {% endblock head_extrascripts %}
 
 {% block content %}
-    <h1 class="mx-auto text-center pb-10 text-xl font-bold">Machine learning</h1>
-    <form id="predictionForm" action="#" method="post">
+<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+<div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+    <h1 class="mx-auto text-center pb-10 text-xl font-bold">Loan Application Form</h1>
+    <form class="space-y-4 md:space-y-6" action="#" method="post">
         {% csrf_token %}
         <!-- Bloc 1 -->
         <div class="block" id="block1">
@@ -68,20 +71,20 @@
     
         <!-- Bloc 2 -->
         <div class="block" id="block2">
-            <label for="City" class="form-label">City:</label>
+            {{ form.City.label }}
             {{ form.City | attr:"class:form-field" }}
             <br>
-            <label for="State" class="form-label">State:</label>
+            {{ form.State.label }}
             {{ form.State | attr:"class:form-field" }}
             <br>
-            <label for="Bank" class="form-label">Bank:</label>
+            {{ form.Bank.label }}
             {{ form.Bank | attr:"class:form-field" }}
             <br>
-            <label for="BankState" class="form-label">Bank State:</label>
+            {{ form.BankState.label }}
             {{ form.BankState | attr:"class:form-field" }}
             <br>
-            {{ form.FranchiseCode.label }}:
-            {{ form.FranchiseCode | attr:"class:form-field" }}   
+            {{ form.FranchiseCode.label }} 
+            {{ form.FranchiseCode | attr:"class:form-field" }}
             <br>
             <button type="button" onclick="prevBlock()" class="form-button">Précédent</button>
             <button type="button" onclick="nextBlock()" class="form-button">Suivant</button>
@@ -140,6 +143,9 @@
     {% elif error %}
         {{ error }}
     {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock content %}
 
 {% block extra_scripts %}
