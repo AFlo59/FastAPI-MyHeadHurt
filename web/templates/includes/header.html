@@ -16,12 +16,12 @@
 
         <div class="dropdown">
             <!-- Bouton pour la connexion -->
-            <a id="login-btn" class="text-ghost_white-900 flex items-center" href="{% url 'login' %}" style="display: {% if user.is_authenticated %}none{% endif %}">
+            <a id="login-btn" class="text-ghost_white flex items-center" href="{% url 'login' %}" style="display: {% if user.is_authenticated %}none{% endif %}">
                 <i class="fa fa-user mr-2"></i>
                 Login
             </a>
             <!-- Bouton pour l'inscription -->
-            <a id="signup-btn" class="text-red-600 flex items-center" href="{% url 'accounts:register' %}" style="display: {% if user.is_authenticated %}none{% endif %}">
+            <a id="signup-btn" class="text-red flex items-center" href="{% url 'accounts:register' %}" style="display: {% if user.is_authenticated %}none{% endif %}">
                 <i class="fa fa-user-plus mr-2"></i>
                 Signup
             </a>
