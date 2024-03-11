@@ -6,8 +6,8 @@
 {% block head_extrascripts %}
 <title>Loan Application Form</title>
 <style>
-     .bg-image {
-        background-image: url("{% static 'bg_maxime-francis_pexels.jpg' %}");
+        .bg-image {
+        background-image: url("{% static 'img/bg_maxime-francis_pexels.jpg' %}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -15,7 +15,6 @@
 
     .form-label {
         display: block;
-        margin-bottom: 0.5rem;
         font-size: 0.875rem;
         color: #374151;
     }
@@ -39,11 +38,27 @@
         cursor: pointer;
         transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
     }
+    .form-Vbutton {
+        color: #fff;
+        background-color: #4dce2c;
+        border-color: #4dce2c;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.875rem;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    }
 
     .form-button:hover {
         background-color: #2563eb;
         border-color: #2563eb;
     }
+
+    .form-Vbutton:hover {
+        background-color: #3ea624;
+        border-color: #3ea624;
+    }
+    
 </style>
 {% endblock head_extrascripts %}
 
@@ -71,7 +86,7 @@
             <label for="phone_number" class="form-label">Phone Number:</label>
             <input type="text" id="phone_number" name="phone_number" class="form-field" value="{{ user.phone_number }}">
             <br>
-            <button type="button" onclick="nextBlock()" class="form-button">Suivant</button>
+            <button type="button" onclick="nextBlock()" class="form-button">Next</button>
         </div>
     
         <!-- Bloc 2 -->
@@ -91,8 +106,8 @@
             {{ form.Franchise.label }} 
             {{ form.Franchise | attr:"class:form-field" }}
             <br>
-            <button type="button" onclick="prevBlock()" class="form-button">Précédent</button>
-            <button type="button" onclick="nextBlock()" class="form-button">Suivant</button>
+            <button type="button" onclick="prevBlock()" class="form-button">Previous</button>
+            <button type="button" onclick="nextBlock()" class="form-button">Next</button>
         </div>
 
         <!-- Bloc 3 -->
@@ -117,8 +132,8 @@
                 {{ form.RetainedJob.label }}:
                 {{ form.RetainedJob | attr:"class:form-field" }}
             </div>
-            <button type="button" onclick="prevBlock()" class="form-button">Précédent</button>
-            <button type="button" onclick="nextBlock()" class="form-button">Suivant</button>
+            <button type="button" onclick="prevBlock()" class="form-button">Previous</button>
+            <button type="button" onclick="nextBlock()" class="form-button">Next</button>
         </div>
     
         <!-- Bloc 4 -->
@@ -138,8 +153,8 @@
             {{ form.SBA_Appv.label }}:
             {{ form.SBA_Appv | attr:"class:form-field" }}
             <br>
-            <button type="button" onclick="prevBlock()" class="form-button">Précédent</button>
-            <button id="submit" type="submit" class="form-button">Soumettre</button>
+            <button type="button" onclick="prevBlock()" class="form-button">Previous</button>
+            <button id="submit" type="submit" class="form-Vbutton">Submit</button>
         </div>
 
       </form>

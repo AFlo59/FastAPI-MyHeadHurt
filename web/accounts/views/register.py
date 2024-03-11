@@ -46,7 +46,7 @@ class RegisterView(CreateView):
         # If all checks pass, proceed with registration
         response = super().form_valid(form)
         user = form.save(commit=False)
-        user.is_active = False
+        user.is_active = True #False
         user.save()
         send_confirmation_email(user)
         messages.success(self.request, 'Account created successfully. Please verify your email.')
