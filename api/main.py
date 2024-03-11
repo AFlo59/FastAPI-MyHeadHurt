@@ -10,8 +10,8 @@ class LoanInput(BaseModel):
     Bank: str
     BankState: str
     NAICS: str
-    ApprovalDate: str
-    ApprovalFY: int
+#    ApprovalDate: str
+#    ApprovalFY: int
     Term: int
     NoEmp: int
     NewExist: bool

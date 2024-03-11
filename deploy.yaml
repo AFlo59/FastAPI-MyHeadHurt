@@ -1,0 +1,63 @@
+apiVersion: 2019-12-01
+location: francecentral
+name: SBAloan
+properties:
+  containers:
+  - name: postgresdb
+    properties:
+      image: postgres
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1
+      ports:
+       - port: 5432
+      environmentVariables:
+        - name: POSTGRES_DB
+          value: demo_db
+        - name: POSTGRES_PASSWORD
+          value: 123
+        - name: POSTGRES_USER
+          value: myuser
+        - name: POSTGRES_HOST
+          value: postgres_db
+        - name: POSTGRES_PORT
+          value: 5432
+  - name: web
+    properties:
+      image: rickysims/Django-api
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+        ports:
+          - port: 80
+        environmentVariables:
+        - name: SECRET_KEY
+          value: xpsem#f)o1((obu#5rha^kq%74yz0ktc-#j3!)dd(lc^uyfq0(
+        - name: URL_API
+          value: http://localhost:8002/funct/predict
+        - name: DEBUG
+          value: "0"
+        - name: POSTGRES_DB
+          value: demo_db
+        - name: API_KEY
+          value: 5868b07c-0ef4-4e79-8f9e-4e0d65847a20
+        - name: POSTGRES_PASSWORD
+          value: 123
+        - name: POSTGRES_USER
+          value: myuser
+        - name: POSTGRES_HOST
+          value: postgres_db
+        - name: POSTGRES_PORT
+          value: 5432
+  osType: Linux
+  ipAddress:
+    type: Public
+    ports:
+    - protocol: tcp
+      port: 80
+    - protocol: tcp
+      port: 8080
+tags: {exampleTag: tutorial}
+type: Microsoft.ContainerInstance/containerGroups

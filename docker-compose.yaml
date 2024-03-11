@@ -3,6 +3,7 @@ services:
   web:
     depends_on:
       - postgres_db
+      - api
     ports:
       - 8006:8000
     env_file:
@@ -11,10 +12,18 @@ services:
       context: ./web/
       dockerfile: Dockerfile
     volumes:
-      -./web/:/app/
+      - ./web/:/app/
+  api:
+    depends_on:
+      - postgres_db
+    ports:
+      - 8001:8001
+    build:
+      context: ./api/
+      dockerfile: Dockerfile
   postgres_db:
     image: postgres 
-    restart : always
+    restart: always
     env_file:
       - web/.env
     ports:
