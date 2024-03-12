@@ -11,11 +11,6 @@ class LoanInput(BaseModel):
     Bank: str
     BankState: str
     NAICS: str
-<<<<<<< HEAD
-#    ApprovalDate: str
-#    ApprovalFY: int
-=======
->>>>>>> efdc92fe11a7a189cd7006dedc1bab6197657122
     Term: int
     NoEmp: int
     NewExist: bool

@@ -1,62 +1,8 @@
-<<<<<<< HEAD
-apiVersion: 2019-12-01
-=======
 apiVersion: '2019-12-01'
->>>>>>> efdc92fe11a7a189cd7006dedc1bab6197657122
 location: francecentral
 name: SBAloan
 properties:
   containers:
-<<<<<<< HEAD
-  - name: postgresdb
-    properties:
-      image: postgres
-      resources:
-        requests:
-          cpu: 1
-          memoryInGb: 1
-      ports:
-       - port: 5432
-      environmentVariables:
-        - name: POSTGRES_DB
-          value: demo_db
-        - name: POSTGRES_PASSWORD
-          value: 123
-        - name: POSTGRES_USER
-          value: myuser
-        - name: POSTGRES_HOST
-          value: postgres_db
-        - name: POSTGRES_PORT
-          value: 5432
-  - name: web
-    properties:
-      image: j30v/django-2024
-      resources:
-        requests:
-          cpu: 1
-          memoryInGb: 1.5
-        ports:
-          - port: 80
-        environmentVariables:
-        - name: SECRET_KEY
-          value: xpsem#f)o1((obu#5rha^kq%74yz0ktc-#j3!)dd(lc^uyfq0(
-        - name: URL_API
-          value: http://localhost:8002/funct/predict
-        - name: DEBUG
-          value: "0"
-        - name: POSTGRES_DB
-          value: demo_db
-        - name: API_KEY
-          value: 5868b07c-0ef4-4e79-8f9e-4e0d65847a20
-        - name: POSTGRES_PASSWORD
-          value: 123
-        - name: POSTGRES_USER
-          value: myuser
-        - name: POSTGRES_HOST
-          value: postgres_db
-        - name: POSTGRES_PORT
-          value: 5432
-=======
     - name: postgresdb
       properties:
         image: postgres
@@ -125,20 +71,12 @@ properties:
         ports:
           - port: 8002
 
->>>>>>> efdc92fe11a7a189cd7006dedc1bab6197657122
   osType: Linux
   ipAddress:
     type: Public
     ports:
-<<<<<<< HEAD
-    - protocol: tcp
-      port: 80
-    - protocol: tcp
-      port: 8080
-=======
       - protocol: tcp
         port: 80  # Adapter en fonction des besoins de votre application
 
->>>>>>> efdc92fe11a7a189cd7006dedc1bab6197657122
 tags: null
 type: Microsoft.ContainerInstance/containerGroups

@@ -7,13 +7,8 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required  
 from .forms import ModelApiForm  
 import json
-<<<<<<< HEAD
-import os
-from requests import Session
-=======
 from requests import Session, Timeout, TooManyRedirects
 from json import JSONDecodeError
->>>>>>> efdc92fe11a7a189cd7006dedc1bab6197657122
 
 
 class FunctionalitiesListView(LoginRequiredMixin, ListView):
@@ -27,33 +22,6 @@ class FunctionalitiesDetailView(DetailView):
 
 @login_required
 def predict_page(request):
-<<<<<<< HEAD
-    url = os.getenv('API_URL')
-
-    headers = {
-    'Accepts': 'application/json',
-    }
-
-    session = Session()
-    session.headers.update(headers)
-
-        # if this is a POST request we need to process the form data
-    if request.method == "POST":
-        # create a form instance and populate it with data from the request:
-        form = ModelApiForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            print(form.cleaned_data)
-            
-            features = json.dumps(form.cleaned_data)
-            response = session.post(url, data=features)
-            data = json.loads(response.text)
-            form.save()
-            print('ok')
-
-            return render(request, "functionalities/predict_page.html", context={'form':form, 'data': data})
-
-=======
     if request.user.is_authenticated:
         # Retrieve user information if user is logged in
         user_info = {
@@ -65,7 +33,6 @@ def predict_page(request):
         }
         # Initialize form with user information
         form = ModelApiForm(initial=user_info)
->>>>>>> efdc92fe11a7a189cd7006dedc1bab6197657122
     else:
         form = ModelApiForm()
 
