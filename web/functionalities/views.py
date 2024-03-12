@@ -4,10 +4,11 @@ from .models import Functionalities
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.contrib.auth.decorators import login_required  # Import login_required decorator
-from .forms import ModelApiForm  # Import your ModelApiForm
+from django.contrib.auth.decorators import login_required  
+from .forms import ModelApiForm  
 import json
-from requests import Session
+from requests import Session, Timeout, TooManyRedirects
+from json import JSONDecodeError
 
 
 class FunctionalitiesListView(LoginRequiredMixin, ListView):
@@ -21,18 +22,8 @@ class FunctionalitiesDetailView(DetailView):
 
 @login_required
 def predict_page(request):
-    url = os.environ.get('URL_API')
-
-    headers = {
-        'Accepts': 'application/json',
-    }
-
-    session = Session()
-    session.headers.update(headers)
-
-    # Vérifie si l'utilisateur est connecté
     if request.user.is_authenticated:
-        # Récupère les informations de l'utilisateur connecté
+        # Retrieve user information if user is logged in
         user_info = {
             'first_name': request.user.first_name,
             'last_name': request.user.last_name,
@@ -40,20 +31,28 @@ def predict_page(request):
             'date_of_birth': request.user.date_of_birth,
             'phone_number': request.user.phone_number,
         }
-        # Crée une instance de formulaire pré-remplie avec les informations de l'utilisateur
+        # Initialize form with user information
         form = ModelApiForm(initial=user_info)
     else:
         form = ModelApiForm()
 
-    # Si la requête est POST, traite les données du formulaire
+    api_url = os.environ.get('URL_API')#"http://api:8001/funct/predict/"
+
     if request.method == "POST":
         form = ModelApiForm(request.POST)
         if form.is_valid():
-            features = json.dumps(form.cleaned_data)
-            response = session.post(url, data=features)
-            data = json.loads(response.text)
-            form.save()
-            print('ok')
-            return render(request, "functionalities/predict_page.html", context={'form': form, 'data': data})
+            try:
+                headers = {'Content-Type': 'application/json'}
+                # Serialize form data to JSON
+                data_input = json.dumps(form.cleaned_data)
+                with Session() as session:
+                    response = session.post(api_url, data=data_input, headers=headers)
+                    data = response.json()
+                form.save()
+                return render(request, "functionalities/predict_page.html", context={"form": form, "data": data})
+            except (ConnectionError, Timeout, TooManyRedirects, KeyError, JSONDecodeError) as e:
+                return render(request, "functionalities/predict_page.html", context={"form": form, "error": e})
+        else:
+            return render(request, "functionalities/predict_page.html", context={"form": form})
 
-    return render(request, "functionalities/predict_page.html", context={'form': form})
+    return render(request, "functionalities/predict_page.html", context={"form": form})
