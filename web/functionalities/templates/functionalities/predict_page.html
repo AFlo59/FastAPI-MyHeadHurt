@@ -92,19 +92,19 @@
         <!-- Bloc 2 -->
         <div class="block" id="block2">
             {{ form.City.label }}
-            {{ form.City | attr:"class:form-field" }}
+            {{ form.City }}
             <br>
             {{ form.State.label }}
-            {{ form.State | attr:"class:form-field" }}
+            {{ form.State }}
             <br>
             {{ form.Bank.label }}
-            {{ form.Bank | attr:"class:form-field" }}
+            {{ form.Bank }}
             <br>
             {{ form.BankState.label }}
-            {{ form.BankState | attr:"class:form-field" }}
+            {{ form.BankState }}
             <br>
             {{ form.Franchise.label }} 
-            {{ form.Franchise | attr:"class:form-field" }}
+            {{ form.Franchise }}
             <br>
             <button type="button" onclick="prevBlock()" class="form-button">Previous</button>
             <button type="button" onclick="nextBlock()" class="form-button">Next</button>
@@ -113,24 +113,24 @@
         <!-- Bloc 3 -->
         <div class="block" id="block3">
             {{ form.NAICS.label }}:
-            {{ form.NAICS | attr:"class:form-field" }}
+            {{ form.NAICS }}
             <br>
             {{ form.Term.label }}:
-            {{ form.Term | attr:"class:form-field" }}
+            {{ form.Term }}
             <br>
             {{ form.NoEmp.label }}:
-            {{ form.NoEmp | attr:"class:form-field" }}
+            {{ form.NoEmp }}
             <br>
             {{ form.NewExist.label }}:
-            {{ form.NewExist | attr:"class:form-field" }}
+            {{ form.NewExist }}
             <br>
             <div id="createJobField">
                 {{ form.CreateJob.label }}:
-                {{ form.CreateJob | attr:"class:form-field" }}
+                {{ form.CreateJob }}
             </div>
             <div id="retainedJobField">
                 {{ form.RetainedJob.label }}:
-                {{ form.RetainedJob | attr:"class:form-field" }}
+                {{ form.RetainedJob }}
             </div>
             <button type="button" onclick="prevBlock()" class="form-button">Previous</button>
             <button type="button" onclick="nextBlock()" class="form-button">Next</button>
@@ -139,19 +139,19 @@
         <!-- Bloc 4 -->
         <div class="block" id="block4">
             {{ form.UrbanRural.label }}:
-            {{ form.UrbanRural | attr:"class:form-field" }}
+            {{ form.UrbanRural }}
             <br>
             {{ form.RevLineCr.label }}:
-            {{ form.RevLineCr | attr:"class:form-field" }}
+            {{ form.RevLineCr }}
             <br>
             {{ form.LowDoc.label }}:
-            {{ form.LowDoc | attr:"class:form-field" }}
+            {{ form.LowDoc }}
             <br>
             {{ form.GrAppv.label }}:
-            {{ form.GrAppv | attr:"class:form-field" }}
+            {{ form.GrAppv }}
             <br>
             {{ form.SBA_Appv.label }}:
-            {{ form.SBA_Appv | attr:"class:form-field" }}
+            {{ form.SBA_Appv }}
             <br>
             <button type="button" onclick="prevBlock()" class="form-button">Previous</button>
             <button id="submit" type="submit" class="form-Vbutton">Submit</button>
@@ -212,6 +212,10 @@
         const createJobField = document.getElementById("createJobField");
         const retainedJobField = document.getElementById("retainedJobField");
         const newExistField = document.getElementById("id_NewExist");
+        const noEmpField = document.getElementById("id_NoEmp");
+
+            document.getElementById("id_Term").value = "1";
+            document.getElementById("id_NoEmp").value = "0";
 
         // Masquer les champs CreateJob et RetainedJob au chargement de la page
         createJobField.style.display = 'none';
@@ -223,9 +227,13 @@
                 // Si NewExist est True, afficher le champ CreateJob et masquer le champ RetainedJob
                 createJobField.style.display = 'block';
                 retainedJobField.style.display = 'none';
+                document.getElementById("id_RetainedJob").value = 0;
+                document.getElementById("id_CreateJob").value = noEmpField.value;
             } else {
                 // Sinon, masquer le champ CreateJob et afficher le champ RetainedJob
-                createJobField.style.display = 'none';
+                document.getElementById("id_CreateJob").value = 0;
+                document.getElementById("id_RetainedJob").value = noEmpField.value;
+                createJobField.style.display = 'block';
                 retainedJobField.style.display = 'block';
             }
         });

@@ -28,7 +28,7 @@ class LoanOutput(BaseModel):
 
 model = load_model()
 
-@app.post('/predict', response_model=LoanOutput)
+@app.post('/funct/predict/', response_model=LoanOutput)
 def predict_loan(input_data: LoanInput):
     features = input_data.dict()
     input_df = pd.DataFrame([features])
