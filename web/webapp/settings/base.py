@@ -39,12 +39,14 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "livereload",
     "django.contrib.staticfiles",
     "accounts",
     "main",
     "functionalities",
     'widget_tweaks',
+    "tailwind",
+    "theme",
+    "django_browser_reload",
 ]
 
 MIDDLEWARE = [
@@ -56,7 +58,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'livereload.middleware.LiveReloadScript',
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = "webapp.urls"
@@ -191,3 +193,9 @@ EMAIL_HOST_USER = os.environ.get('MAILJET_API_KEY')
 EMAIL_HOST_PASSWORD = os.environ.get('MAILJET_SECRET_KEY')
 
 BASE_URL = 'http://SB-Administration.com'  # Remplacez example.com par le domaine de votre site
+
+TAILWIND_APP_NAME = 'theme'
+
+INTERNAL_IPS = {
+    "127.0.0.1",
+}
