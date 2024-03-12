@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+import pandas as pd
 from model_utils import load_model, prediction
 
 app = FastAPI()
@@ -30,5 +31,7 @@ model = load_model()
 @app.post('/predict', response_model=LoanOutput)
 def predict_loan(input_data: LoanInput):
     features = input_data.dict()
-    predictions = prediction(model, [features])
-    return LoanOutput(Approve=predictions)
+    input_df = pd.DataFrame([features])
+    predictions = prediction(model, input_df)
+
+    return LoanOutput(Approve=bool(predictions[0]))
