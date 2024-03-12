@@ -13,6 +13,10 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./web/:/app/
+<<<<<<< HEAD
+=======
+
+>>>>>>> efdc92fe11a7a189cd7006dedc1bab6197657122
   api:
     depends_on:
       - postgres_db
@@ -21,6 +25,10 @@ services:
     build:
       context: ./api/
       dockerfile: Dockerfile
+<<<<<<< HEAD
+=======
+
+>>>>>>> efdc92fe11a7a189cd7006dedc1bab6197657122
   postgres_db:
     image: postgres 
     restart: always
@@ -30,5 +38,6 @@ services:
       - 5433:5432
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+
 volumes:
   postgres_data:

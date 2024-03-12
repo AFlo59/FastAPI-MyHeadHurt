@@ -1,9 +1,7 @@
 from joblib import load
-from catboost import CatBoostClassifier  
 
-def load_model(path='Model_pret/Model/catboost_model.pkl'):
-    model = CatBoostClassifier()
-    model.load_model(path)
+def load_model(path='catboost_model.pkl'):
+    model = load(path)
     return model
 
 def prediction(model, data):
