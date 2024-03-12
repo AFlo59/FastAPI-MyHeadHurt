@@ -18,11 +18,13 @@ def username_page(request, username):
             form.save()
             messages.success(request, f'Your account has been updated!')
             return redirect('username', username=username)
+        else:
+            messages.error(request, 'An error occurred while updating your account.')
     else:
         form = UserUpdateForm(instance=user)
 
     context = {
-        'username': username,
+        'user': user,
         'form': form,
     }
     return render(request, 'registration/username.html', context)

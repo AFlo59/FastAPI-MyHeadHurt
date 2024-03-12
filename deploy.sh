@@ -1,2 +1,2 @@
 #!/bin/sh
-az container create --resource-group RG_ABADIF --file deploy-aci.yaml
+az container create --resource-group RG_ABADIF --file deploy.yaml
