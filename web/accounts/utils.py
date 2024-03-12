@@ -6,20 +6,19 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.template.loader import render_to_string
 from django.core.exceptions import ImproperlyConfigured
+from django.urls import reverse
+from django.http import HttpRequest
 
 from accounts.models import CustomUser
 
-def send_confirmation_email(user):
+def send_confirmation_email(request, user):
     # Generate activation link
     uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
     token = default_token_generator.make_token(user)
-    activation_link = f"{os.getenv('FRONTEND_URL')}/accounts/validate_email/{uidb64}/{token}/?is_active=True"
+    activation_link = request.build_absolute_uri(reverse('accounts:activate', kwargs={'uidb64': uidb64, 'token': token}))
 
     # Construct the email content
-    email_content = render_to_string('email_templates/activation_email.html', {
-        'user': user,
-        'activation_link': activation_link
-    })
+    email_content = f"Hello {user.username},\n\nPlease click on the following link to activate your account:\n{activation_link}"
 
     # Send the email using Mailjet API
     api_key = os.getenv('MAILJET_API_KEY')

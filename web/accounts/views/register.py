@@ -1,4 +1,3 @@
-import os
 from django.contrib import messages
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
@@ -23,6 +22,8 @@ class RegisterView(CreateView):
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
+        response = super().form_valid(form)
+
         # Check if email or username is already in use
         email = form.cleaned_data['email']
         username = form.cleaned_data['username']
@@ -43,12 +44,12 @@ class RegisterView(CreateView):
             messages.error(self.request, 'Password must be at least 8 characters long.')
             return self.form_invalid(form)
 
-        # If all checks pass, proceed with registration
-        response = super().form_valid(form)
+        # Proceed with registration
         user = form.save(commit=False)
         user.is_active = True #False
         user.save()
-        send_confirmation_email(user)
+        send_confirmation_email(request=self.request, user=user)  # Pass the request argument
+
         messages.success(self.request, 'Account created successfully. Please verify your email.')
         return response
 
