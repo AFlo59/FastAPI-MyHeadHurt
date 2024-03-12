@@ -9,6 +9,7 @@ from .forms import ModelApiForm
 import json
 from requests import Session, Timeout, TooManyRedirects
 from json import JSONDecodeError
+from django.http import JsonResponse
 
 
 class FunctionalitiesListView(LoginRequiredMixin, ListView):
@@ -36,7 +37,7 @@ def predict_page(request):
     else:
         form = ModelApiForm()
 
-    api_url = os.environ.get('URL_API')#"http://api:8001/funct/predict/"
+    api_url = os.environ.get('URL_API')
 
     if request.method == "POST":
         form = ModelApiForm(request.POST)
@@ -45,6 +46,9 @@ def predict_page(request):
                 headers = {'Content-Type': 'application/json'}
                 # Serialize form data to JSON
                 data_input = json.dumps(form.cleaned_data)
+                # If user_info was included in the form data, remove it
+                if 'user_info' in data_input:
+                    del data_input['user_info']
                 with Session() as session:
                     response = session.post(api_url, data=data_input, headers=headers)
                     data = response.json()

@@ -23,21 +23,27 @@ class ModelApiForm(forms.ModelForm):
         'GrAppv': 'Please indicate the gross amount of the loan approved by the bank',
         'SBA_Appv': 'Please indicate the amount guaranteed approved by the SBA',
     }
+    
+    widgets = {
+            'City': forms.TextInput(attrs={'class': 'form-field', 'required': True}),
+            'State': forms.Select(attrs={'class': 'form-field', 'required': True}),
+            'Bank': forms.TextInput(attrs={'class': 'form-field', 'required': True}),
+            'BankState': forms.Select(attrs={'class': 'form-field', 'required': True}),
+            'NAICS': forms.Select(attrs={'class': 'form-field', 'required': True}),
+            'Term': forms.NumberInput(attrs={'class': 'form-field', 'required': True, 'min': 1}),
+            'NoEmp': forms.NumberInput(attrs={'class': 'form-field', 'required': True, 'min': 1}),
+            'NewExist': forms.Select(attrs={'class': 'form-field', 'required': True}),
+            'CreateJob': forms.NumberInput(attrs={'class': 'form-field', 'required': True, 'min': 0}),
+            'RetainedJob': forms.NumberInput(attrs={'class': 'form-field', 'required': False, 'min': 0}),
+            'Franchise': forms.Select(attrs={'class': 'form-field', 'required': True}),
+            'UrbanRural': forms.Select(attrs={'class': 'form-field', 'required': True}),
+            'RevLineCr': forms.Select(attrs={'class': 'form-field', 'required': True}),
+            'LowDoc': forms.Select(attrs={'class': 'form-field', 'required': True}),
+            'GrAppv': forms.NumberInput(attrs={'class': 'form-field', 'required': True, 'min': 0}),
+            'SBA_Appv': forms.NumberInput(attrs={'class': 'form-field', 'required': True, 'min': 0}),
+        }
 
     def __init__(self, *args, **kwargs):
         super(ModelApiForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-field'})
-
-        new_exist_value = self.initial.get('NewExist', None) if self.instance else None
-        
-        # If NewExist is Existing, set RetainedJob field to 0 and hide it
-        if new_exist_value == 'Existing':
-            self.fields['RetainedJob'].initial = 0
-            self.fields['RetainedJob'].widget = forms.HiddenInput()
-            # Also, make sure to clear any data in the RetainedJob field
-            self.fields['RetainedJob'].required = False
-            self.cleaned_data['RetainedJob'] = 0
-        else:
-            # If NewExist is not Existing, show the RetainedJob field
-            self.fields['RetainedJob'].widget = forms.TextInput()
