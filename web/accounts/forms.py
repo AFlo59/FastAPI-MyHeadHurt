@@ -1,7 +1,10 @@
+#accounts.forms.py
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth import authenticate
 from django import forms
 from accounts.models import CustomUser
+from django.contrib.auth.forms import SetPasswordForm
+from django.utils.translation import gettext_lazy as _
 
 class RegisterForm(UserCreationForm):
     class Meta:
@@ -70,3 +73,27 @@ class UserUpdateForm(forms.ModelForm):
 
 class ForgotPasswordForm(forms.Form):
     email = forms.EmailField(label='Email', max_length=254, widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email'}))
+
+class CustomSetPasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(
+        label=_("New password"),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control'}),
+        strip=False,
+        help_text=_("Enter your new password."),
+    )
+    new_password2 = forms.CharField(
+        label=_("New password confirmation"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control'}),
+        help_text=_("Enter the same password as before, for verification."),
+    )
+
+    def clean_new_password2(self):
+        password1 = self.cleaned_data.get('new_password1')
+        password2 = self.cleaned_data.get('new_password2')
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError(
+                self.error_messages['password_mismatch'],
+                code='password_mismatch',
+            )
+        return password2

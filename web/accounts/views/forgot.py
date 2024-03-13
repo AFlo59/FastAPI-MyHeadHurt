@@ -9,7 +9,8 @@ from django.utils.http import urlsafe_base64_encode
 from mailjet_rest import Client
 from django.contrib import messages
 
-from django.contrib.auth.forms import SetPasswordForm
+from django.utils.http import urlsafe_base64_decode
+from accounts.forms import CustomSetPasswordForm
 from django.contrib.auth import views as auth_views
 
 password_reset_confirm = auth_views.PasswordResetConfirmView.as_view()
@@ -58,18 +59,24 @@ def forgot_password(request):
     return render(request, 'registration/forgot_password.html', {'form': form})
 
 def reset_password_confirm(request, uidb64, token):
-    if request.method == 'POST':
-        form = SetPasswordForm(request.POST)
-        if form.is_valid():
-            user = CustomUser.objects.get_by_natural_key(uidb64)
-            if password_reset_confirm(request, uidb64=uidb64, token=token):
-                user.set_password(form.cleaned_data['new_password1'])
-                user.save()
-                messages.success(request, 'Your password has been reset successfully.')
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = CustomUser.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, CustomUser.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        if request.method == 'POST':
+            form = CustomSetPasswordForm(user, request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Your password has been successfully reset.')
                 return redirect('login')
             else:
-                messages.error(request, 'Invalid token or expired link.')
+                messages.error(request, 'Please correct the errors below.')
+        else:
+            form = CustomSetPasswordForm(user)
+        return render(request, 'registration/reset_password_confirm.html', {'form': form})
     else:
-        form = SetPasswordForm()
-
-    return render(request, 'registration/reset_password_confirm.html', {'form': form})
+        messages.error(request, 'Invalid token or expired link.')
+        return redirect('login')
