@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load widget_tweaks %}
 {% block head_extrascripts %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 {% endblock head_extrascripts %}
-
 {% block content %}
+{% block messages %}
+{% endblock messages %}
 <section>
   <div id="profile-info">
     <p>Email: {{ user.email }}</p>
@@ -13,7 +14,7 @@
     <p>First Name: {{ user.first_name }}</p>
     <p>Last Name: {{ user.last_name }}</p>
     <p>Date of birth: {{ user.date_of_birth }}</p>
-    <button id="modify-btn">modify</button>
+    <button id="modify-btn">Changes</button>
   </div>
   <div id="profile-form" style="display: none;">
     <form method="post">
@@ -23,7 +24,7 @@
     </form>
   </div>
 </section>
-{% endblock %}
+{% endblock content %}
 
 {% block extra_scripts %}
 <script>

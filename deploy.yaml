@@ -36,7 +36,7 @@ properties:
           - name: SECRET_KEY
             value: xpsem#f)o1((obu#5rha^kq%74yz0ktc-#j3!)dd(lc^uyfq0(
           - name: URL_API
-            value: http://localhost:8002/predict
+            value: http://localhost:8001/funct/predict
           - name: DEBUG
             value: "0"
           - name: POSTGRES_DB
@@ -69,7 +69,7 @@ properties:
             cpu: 1
             memoryInGb: 1.5
         ports:
-          - port: 8002
+          - port: 8001
 
   osType: Linux
   ipAddress:

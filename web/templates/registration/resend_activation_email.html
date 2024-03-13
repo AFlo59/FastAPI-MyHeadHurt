@@ -1,6 +1,9 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
-
+{% load widget_tweaks %}
+{% block head_extrascripts %}
+    <title>Resend-activation-mail</title>
+{% endblock head_extrascripts %}
 {% block content %}
   <h2>Resend Activation Email</h2>
   <p>Enter your email address below to resend the activation email.</p>
@@ -11,3 +14,5 @@
     <button type="submit">Resend Activation Email</button>
   </form>
 {% endblock content %}
+{% block extra_scripts %}
+{% endblock extra_scripts %}

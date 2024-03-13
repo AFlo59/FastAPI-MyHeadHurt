@@ -18,7 +18,10 @@
     {% include "includes/header.html" %}
 
     <div class='max-w-7xl mx-auto my-10'>
-    {% block content %}{% endblock content %}
+    {% block content %}
+    {% block messages %}
+    {% endblock messages %}
+    {% endblock content %}
     </div>
     {% include "includes/footer.html" %}
     </div>

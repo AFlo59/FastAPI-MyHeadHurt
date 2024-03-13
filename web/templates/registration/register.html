@@ -49,28 +49,23 @@
                               <button type="submit" class="custom-button w-full text-white bg-[#1E40AF] hover:bg-[#153E75] focus:ring-4 focus:outline-none focus:ring-[#4299E1] font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#1E40AF] dark:hover:bg-[#153E75] dark:focus:ring-[#0F172A]">
                                 Create an account
                               </button>
-                            {% if messages %}
-                            <ul class="messages">
-                            {% for message in messages %}
-                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                            {% endfor %}
-                            </ul>
-                            {% endif %}
-                            {% if existing_user %}
-                            {% if not existing_user.is_active %}
-                            <p class="div9">An account with the same username and email already exists but is not active.</p>
-                            <a href="{% url 'accounts:sendmail' uidb64='your_uidb64_here' token='your_token_here' %}" class="link2">Resend Activation Email</a>
-                            {% endif %}
-                            {% endif %}
-                              <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                                  Already have an account? <a href="{% url 'accounts:login' %}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a>
-                              </p>
                           </form>
+                            {% block messages %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            {% endblock messages %}
                         </div>
                     </div>
                 </div>
               </section>
-              
         </div>
     </div>
     <div class="background-container">
@@ -79,4 +74,6 @@
         </figure>
     </div>
 </section>
-{% endblock %}
+{% endblock content %}
+{% block extra_scripts %}
+{% endblock extra_scripts %}
