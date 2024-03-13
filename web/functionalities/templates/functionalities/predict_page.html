@@ -17,6 +17,12 @@
         display: block;
         font-size: 0.875rem;
         color: #374151;
+        display: flex;
+        flex-direction: row;
+        text-align: right;
+        width: 400px;
+        line-height: 26px;
+        margin-bottom: 10px;
     }
 
     .form-field {
@@ -26,6 +32,7 @@
         border: 1px solid #e5e7eb;
         border-radius: 0.375rem;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        margin-bottom: 10px;
     }
 
     .form-button {
@@ -37,6 +44,7 @@
         border-radius: 0.375rem;
         cursor: pointer;
         transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+        margin-right: 5px;
     }
     .form-Vbutton {
         color: #fff;
@@ -55,7 +63,7 @@
     }
 
     .form-Vbutton:hover {
-        background-color: #3ea624;
+        background-color: #F25041;
         border-color: #3ea624;
     }
     
@@ -86,7 +94,7 @@
             <label for="phone_number" class="form-label">Phone Number:</label>
             <input type="text" id="phone_number" name="phone_number" class="form-field" value="{{ user.phone_number }}">
             <br>
-            <button type="button" onclick="nextBlock()" class="form-button">Next</button>
+            <button type="button" onclick="nextBlock()" class="bg-light_blue form-button">Next</button>
         </div>
     
         <!-- Bloc 2 -->
@@ -106,8 +114,8 @@
             {{ form.Franchise.label }} 
             {{ form.Franchise }}
             <br>
-            <button type="button" onclick="prevBlock()" class="bg-gray form-button">Previous</button>
-            <button type="button" onclick="nextBlock()" class="bg-gray form-button">Next</button>
+            <button type="button" onclick="prevBlock()" class="bg-light_blue form-button">Previous</button>
+            <button type="button" onclick="nextBlock()" class="bg-light_blue form-button">Next</button>
         </div>
 
         <!-- Bloc 3 -->
@@ -132,8 +140,8 @@
                 {{ form.RetainedJob.label }}:
                 {{ form.RetainedJob }}
             </div>
-            <button type="button" onclick="prevBlock()" class="bg-gray form-button">Previous</button>
-            <button type="button" onclick="nextBlock()" class="bg-gray form-button">Next</button>
+            <button type="button" onclick="prevBlock()" class="bg-light_blue form-button">Previous</button>
+            <button type="button" onclick="nextBlock()" class="bg-light_blue form-button">Next</button>
         </div>
     
         <!-- Bloc 4 -->
@@ -153,8 +161,8 @@
             {{ form.SBA_Appv.label }}:
             {{ form.SBA_Appv }}
             <br>
-            <button type="button" onclick="prevBlock()" class="bg-gray form-button">Previous</button>
-            <button id="submit" type="submit" class="bg-red form-Vbutton">Submit</button>
+            <button type="button" onclick="prevBlock()" class="bg-light_blue form-button">Previous</button>
+            <button id="submit" type="submit" class="bg-light_blue form-Vbutton">Submit</button>
         </div>
 
       </form>
