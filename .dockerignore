@@ -1,3 +1,4 @@
 .env
 .venv
 deploy.yaml
+/api/Model_pret/

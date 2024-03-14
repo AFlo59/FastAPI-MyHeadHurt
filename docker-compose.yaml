@@ -5,7 +5,7 @@ services:
       - postgres_db
       - api
     ports:
-      - 8006:8000
+      - 8006:8006
     env_file:
       - web/.env
     build: 
