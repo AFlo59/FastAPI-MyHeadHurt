@@ -1,0 +1,255 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load static widget_tweaks %}
+
+{% block head_extrascripts %}
+<title>Loan Application Form</title>
+<style>
+        .bg-image {
+        background-image: url("{% static 'img/bg_maxime-francis_pexels.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .form-label {
+        display: block;
+        font-size: 0.875rem;
+        color: #374151;
+        display: flex;
+        flex-direction: row;
+        text-align: right;
+        width: 400px;
+        line-height: 26px;
+        margin-bottom: 10px;
+    }
+
+    .form-field {
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 0.875rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.375rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        margin-bottom: 10px;
+    }
+
+    .form-button {
+        color: #fff;
+        background-color: #3b82f6;
+        border-color: #3b82f6;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.875rem;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+        margin-right: 5px;
+    }
+    .form-Vbutton {
+        color: #fff;
+        background-color: #4dce2c;
+        border-color: #4dce2c;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.875rem;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    }
+
+    .form-button:hover {
+        background-color: #2563eb;
+        border-color: #2563eb;
+    }
+
+    .form-Vbutton:hover {
+        background-color: #F25041;
+        border-color: #3ea624;
+    }
+    
+</style>
+{% endblock head_extrascripts %}
+
+{% block content %}
+<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 bg-image">
+<div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+    <h1 class="mx-auto text-center pb-10 text-xl font-bold">Loan Application Form</h1>
+    <form class="space-y-4 md:space-y-6" action="#" method="post">
+        {% csrf_token %}
+        <!-- Bloc 1 -->
+        <div class="block" id="block1">
+            <label for="firstname" class="form-label">First Name:</label>
+            <input type="text" id="firstname" name="firstname" class="form-field" value="{{ user.first_name }}">
+            <br>
+            <label for="lastname" class="form-label">Last Name:</label>
+            <input type="text" id="lastname" name="lastname" class="form-field" value="{{ user.last_name }}">
+            <br>
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" name="email" class="form-field" value="{{ user.email }}">
+            <br>
+            <label for="date_of_birth" class="form-label">Date of Birth:</label>
+            <input type="date" id="date_of_birth" name="date_of_birth" class="form-field" value="{{ user.date_of_birth }}">
+            <br>
+            <label for="phone_number" class="form-label">Phone Number:</label>
+            <input type="text" id="phone_number" name="phone_number" class="form-field" value="{{ user.phone_number }}">
+            <br>
+            <button type="button" onclick="nextBlock()" class="bg-light_blue form-button">Next</button>
+        </div>
+    
+        <!-- Bloc 2 -->
+        <div class="block" id="block2">
+            {{ form.City.label }}
+            {{ form.City }}
+            <br>
+            {{ form.State.label }}
+            {{ form.State }}
+            <br>
+            {{ form.Bank.label }}
+            {{ form.Bank }}
+            <br>
+            {{ form.BankState.label }}
+            {{ form.BankState }}
+            <br>
+            {{ form.Franchise.label }} 
+            {{ form.Franchise }}
+            <br>
+            <button type="button" onclick="prevBlock()" class="bg-light_blue form-button">Previous</button>
+            <button type="button" onclick="nextBlock()" class="bg-light_blue form-button">Next</button>
+        </div>
+
+        <!-- Bloc 3 -->
+        <div class="block" id="block3">
+            {{ form.NAICS.label }}:
+            {{ form.NAICS }}
+            <br>
+            {{ form.Term.label }}:
+            {{ form.Term }}
+            <br>
+            {{ form.NoEmp.label }}:
+            {{ form.NoEmp }}
+            <br>
+            {{ form.NewExist.label }}:
+            {{ form.NewExist }}
+            <br>
+            <div id="createJobField">
+                {{ form.CreateJob.label }}:
+                {{ form.CreateJob }}
+            </div>
+            <div id="retainedJobField">
+                {{ form.RetainedJob.label }}:
+                {{ form.RetainedJob }}
+            </div>
+            <button type="button" onclick="prevBlock()" class="bg-light_blue form-button">Previous</button>
+            <button type="button" onclick="nextBlock()" class="bg-light_blue form-button">Next</button>
+        </div>
+    
+        <!-- Bloc 4 -->
+        <div class="block" id="block4">
+            {{ form.UrbanRural.label }}:
+            {{ form.UrbanRural }}
+            <br>
+            {{ form.RevLineCr.label }}:
+            {{ form.RevLineCr }}
+            <br>
+            {{ form.LowDoc.label }}:
+            {{ form.LowDoc }}
+            <br>
+            {{ form.GrAppv.label }}:
+            {{ form.GrAppv }}
+            <br>
+            {{ form.SBA_Appv.label }}:
+            {{ form.SBA_Appv }}
+            <br>
+            <button type="button" onclick="prevBlock()" class="bg-light_blue form-button">Previous</button>
+            <button id="submit" type="submit" class="bg-light_blue form-Vbutton">Submit</button>
+        </div>
+
+      </form>
+    {% if data %}
+        {{ data }}
+        {% if data.Approve == True %}
+            <p>You are eligible!</p>
+        {% elif data.Approve == False %}
+            <p>You are not eligible!</p>
+        {% endif %}
+    {% elif error %}
+        {{ error }}
+    {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extra_scripts %}
+<script>
+    let currentBlock = 1;
+    const totalBlocks = 4;
+
+    function nextBlock() {
+        const current = document.getElementById(`block${currentBlock}`);
+        const next = document.getElementById(`block${currentBlock + 1}`);
+      
+        if (next) {
+            current.style.display = 'none';
+            next.style.display = 'block';
+            currentBlock++;
+        }
+    }
+
+    function prevBlock() {
+        const current = document.getElementById(`block${currentBlock}`);
+        const prev = document.getElementById(`block${currentBlock - 1}`);
+      
+        if (prev) {
+            current.style.display = 'none';
+            prev.style.display = 'block';
+            currentBlock--;
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const blocks = document.querySelectorAll('.block');
+        
+        // Hide all blocks except the first one
+        for (let i = 1; i < blocks.length; i++) {
+            blocks[i].style.display = 'none';
+        }
+
+        // Set currentBlock to 1
+        currentBlock = 1;
+    });
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+        const createJobField = document.getElementById("createJobField");
+        const retainedJobField = document.getElementById("retainedJobField");
+        const newExistField = document.getElementById("id_NewExist");
+        const noEmpField = document.getElementById("id_NoEmp");
+
+            document.getElementById("id_Term").value = "1";
+            document.getElementById("id_NoEmp").value = "0";
+
+        // Masquer les champs CreateJob et RetainedJob au chargement de la page
+        createJobField.style.display = 'none';
+        retainedJobField.style.display = 'none';
+
+        // Ajouter un écouteur d'événements pour détecter le changement de valeur de NewExist
+        newExistField.addEventListener("change", function() {
+            if (this.value === 'True') {
+                // Si NewExist est True, afficher le champ CreateJob et masquer le champ RetainedJob
+                createJobField.style.display = 'block';
+                retainedJobField.style.display = 'none';
+                document.getElementById("id_RetainedJob").value = 0;
+                document.getElementById("id_CreateJob").value = noEmpField.value;
+            } else {
+                // Sinon, masquer le champ CreateJob et afficher le champ RetainedJob
+                document.getElementById("id_CreateJob").value = 0;
+                document.getElementById("id_RetainedJob").value = noEmpField.value;
+                createJobField.style.display = 'block';
+                retainedJobField.style.display = 'block';
+            }
+        });
+    });
+</script>
+{% endblock extra_scripts %}

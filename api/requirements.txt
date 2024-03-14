@@ -3,6 +3,7 @@ numpy
 pandas
 seaborn
 catboost
+xgboost
 gdown
 scikit-learn<2
 fastapi<1

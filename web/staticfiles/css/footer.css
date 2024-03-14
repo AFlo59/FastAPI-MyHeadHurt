@@ -1,0 +1,10 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f5f5f5; /* couleur de fond du footer */
+    text-align: center; /* alignement du contenu du footer */
+    padding: 20px 0; /* espacement interne du contenu du footer */
+    max-height: 20vh; /* Hauteur maximale du footer à 1/10 de la hauteur de l'écran */
+}

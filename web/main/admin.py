@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from .models import User
-
-admin.site.register(User, UserAdmin)
+from functionalities.models import ModelApi
+# Register your models here.
+admin.site.register(ModelApi)
