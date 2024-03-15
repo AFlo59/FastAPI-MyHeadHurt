@@ -25,13 +25,13 @@ properties:
             value: 5432
     - name: web
       properties:
-        image: j30v/django_2024 
+        image: rickysims/django-sba
         resources:
           requests:
             cpu: 1
             memoryInGb: 1.5
         ports:
-          - port: 80
+          - port: 8006
         environmentVariables:
           - name: SECRET_KEY
             value: xpsem#f)o1((obu#5rha^kq%74yz0ktc-#j3!)dd(lc^uyfq0(
@@ -58,12 +58,12 @@ properties:
           - name: POSTGRES_PORT
             value: 5432
           - name: POSTGRES_RDY
-            value: 1
+            value: 0
           - name: SENDGRID_API_KEY
             value: ----
     - name: api
       properties:
-        image: j30v/api_2024 
+        image: rickysims/api-sba 
         resources:
           requests:
             cpu: 1
@@ -76,7 +76,7 @@ properties:
     type: Public
     ports:
       - protocol: tcp
-        port: 80  # Adapter en fonction des besoins de votre application
+        port: 8006  # Adapter en fonction des besoins de votre application
 
 tags: null
 type: Microsoft.ContainerInstance/containerGroups

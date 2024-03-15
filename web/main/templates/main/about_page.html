@@ -1,1 +1,51 @@
-about
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block head_extrascripts %}
+    <title>About Us</title>
+{% endblock head_extrascripts %}
+
+{% block content %}
+<div class="bg-gray-50 dark:bg-gray-900 w-full">
+<div class="flex flex-wrap justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <div class="space-y-4 md:space-y-6">
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">À propos de SBA (Small Business Administration)</h1><br>
+            <p>
+<span class="text-xl font-bold text-gray-700">Bienvenue sur le site de la Small Business Administration (SBA) – Votre partenaire fiable dans la croissance des entreprises.</span>
+            </p>
+        <p>
+<span class="text-medium font-bold text-gray-700">Notre Mission</span><br>
+À SBA, nous nous engageons à soutenir les entrepreneurs ambitieux dans la réalisation de leurs rêves d'entreprise. Notre mission est d'apporter une solution novatrice et prédictive aux petites entreprises qui cherchent à obtenir un prêt d'entreprise. Nous croyons fermement que chaque idée entrepreneuriale mérite une chance de prospérer, et c'est pourquoi nous avons développé un système de prédiction robuste pour évaluer la capacité de remboursement des entreprises en herbe.
+        </p>
+        <p>
+<span class="text-medium font-bold text-gray-700">Notre Approche</span><br>
+Notre approche repose sur l'utilisation avancée de l'analyse de données et de l'intelligence artificielle pour évaluer de manière objective la viabilité financière des petites entreprises. En combinant des modèles prédictifs de pointe avec une compréhension approfondie du paysage entrepreneurial, nous sommes en mesure de fournir des conseils financiers précis et personnalisés.
+        </p>
+        <p>
+<span class="text-medium font-bold text-gray-700">Comment Nous Aidons</span><br>
+Que vous soyez un entrepreneur en herbe cherchant à démarrer votre première entreprise ou un propriétaire d'entreprise cherchant à étendre vos activités, SBA est là pour vous guider. Notre plateforme analyse rigoureusement les informations financières et opérationnelles, fournissant une évaluation rapide et précise de la probabilité de remboursement d'un prêt d'entreprise.
+        </p>
+        <p>
+<span class="text-medium font-bold text-gray-700">Pourquoi Choisir SBA</span><br>
+<ul>
+<li>- Précision: Nos modèles prédictifs sont conçus pour offrir des résultats fiables et précis, basés sur des données tangibles.</li>
+    <li>- Engagement: Nous sommes déterminés à soutenir le succès de chaque entreprise, en offrant des conseils adaptés à chaque situation unique.</li>
+        <li>- Accessibilité: SBA s'efforce de rendre le processus de demande de prêt transparent et accessible à tous, favorisant ainsi l'inclusivité entrepreneuriale.</li>
+</ul>
+        </p>
+        <p>
+Rejoignez-nous dans la construction d'un avenir entrepreneurial prospère. Chez SBA, nous croyons en votre potentiel et nous sommes là pour vous aider à réussir.
+        </p>
+        <p>
+Contactez-nous dès aujourd'hui pour démarrer votre parcours vers le succès entrepreneurial.
+        </p>
+        <a href="#" class="flex justify-center items-center mb-6 text-2xl mx-auto font-semibold text-gray-900 dark:text-ghost_white">
+            <img class="w-20 h-20 mr-2" src="{% static 'img/sba-nobg.jpeg' %}" alt="logo">
+        </a>
+    </div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}

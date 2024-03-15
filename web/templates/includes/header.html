@@ -1,6 +1,7 @@
 {% load static %}
 {% url "special" as url_special %}
 {% url "func-list" as url_func %}
+{% url "about" as url_about %}
 {% url "api" as url_api %}
 {% url "home" as url_home %}
 {% url "news" as url_news %}
@@ -51,8 +52,8 @@
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <a href="{{ url_func }}">
-                Entrepreneurship Essentials</a>
+            <a href="{{ url_about }}">
+                About us</a>
             <a href="#" class="{% if request.path == url_func %}text-red{% endif %}">
                 Legal and Compliance Information</a>
             <a href="#" class="{% if request.path == url_func %}text-red{% endif %}">
