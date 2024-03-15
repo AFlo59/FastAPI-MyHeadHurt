@@ -40,3 +40,34 @@ Si vous préférez ne pas utiliser Docker Compose, vous pouvez exécuter chaque 
 ## Lien du Dataset utilisé
 
 https://drive.google.com/file/d/1vdNaWcJgMzUnlaDVA4FuZRFYinO8UsPQ/view?usp=drive_link
+
+
+## Génération des Données et Modèles
+
+### Génération des Données
+
+Pour générer les datasets et modèles, veuillez suivre les instructions ci-dessous :
+
+1. Ouvrez le notebook `0_Cleaning.ipynb` situé dans le répertoire `api/Model_pret/Modelisation/` pour effectuer le nettoyage des données.
+
+2. Suivez les étapes nécessaires dans les notebooks `2_` et `3_` pour la génération des données et des modèles respectivement, situés dans le répertoire `api/Model_pret/Modelisation/`.
+
+### Configuration du Fichier .env
+
+Pour configurer votre fichier `.env` pour le projet Web, veuillez inclure les variables suivantes :
+
+```dotenv
+SECRET_KEY=Votre_Cle_Secrete
+DEBUG=True # Ou False en production
+API_KEY=Votre_Cle_API
+MAILJET_SECRET_KEY=Votre_Cle_Secrete_Mailjet
+MAILJET_API_KEY=Votre_Cle_API_Mailjet
+MAILJET_SENDER=Votre_Adresse_Email_Mailjet
+FRONTEND_URL=URL_de_votre_application_Frontend
+POSTGRES_DB=Nom_de_votre_base_de_données
+POSTGRES_PASSWORD=Votre_Mot_de_Passe_PostgreSQL
+POSTGRES_USER=Votre_Utilisateur_PostgreSQL
+POSTGRES_HOST=Adresse_de_votre_hôte_PostgreSQL
+POSTGRES_PORT=Port_de_votre_base_de_données_PostgreSQL
+POSTGRES_RDY=True # Ou False pour indiquer l'état prêt de votre base de données PostgreSQL
+Assurez-vous de remplacer les valeurs fictives par vos propres valeurs dans le fichier .env.
