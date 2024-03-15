@@ -37,3 +37,6 @@ Si vous préférez ne pas utiliser Docker Compose, vous pouvez exécuter chaque 
 4. Utilisez le CLI Azure pour déployer les conteneurs sur Azure Container Instances ou Azure Kubernetes Service, selon vos besoins.
 
 
+## Lien du Dataset utilisé
+
+https://drive.google.com/file/d/1vdNaWcJgMzUnlaDVA4FuZRFYinO8UsPQ/view?usp=drive_link
