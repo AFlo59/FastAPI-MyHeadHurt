@@ -1,6 +1,6 @@
 from joblib import load
 
-def load_model(path='catboost_model.pkl'):
+def load_model(path='Model_pret/Model/catboost_model.pkl'):
     model = load(path)
     return model
 
