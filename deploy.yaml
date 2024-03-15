@@ -25,7 +25,7 @@ properties:
             value: 5432
     - name: web
       properties:
-        image: rickysims/django-sba
+        image: fabadi/django-sba
         resources:
           requests:
             cpu: 1
@@ -63,7 +63,7 @@ properties:
             value: ----
     - name: api
       properties:
-        image: rickysims/api-sba 
+        image: fabadi/api-sba 
         resources:
           requests:
             cpu: 1
