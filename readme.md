@@ -36,16 +36,4 @@ Si vous préférez ne pas utiliser Docker Compose, vous pouvez exécuter chaque 
 3. Pour le déploiement sur Azure, assurez-vous d'avoir un compte Azure et le CLI Azure installé.
 4. Utilisez le CLI Azure pour déployer les conteneurs sur Azure Container Instances ou Azure Kubernetes Service, selon vos besoins.
 
-## Contribution
 
-Les contributions sont les bienvenues ! Si vous souhaitez contribuer à ce projet, veuillez suivre ces étapes :
-
-1. Effectuez un fork du projet.
-2. Créez une branche pour votre fonctionnalité (`git checkout -b feature/AmazingFeature`).
-3. Committez vos modifications (`git commit -m 'Add some AmazingFeature'`).
-4. Poussez vers la branche (`git push origin feature/AmazingFeature`).
-5. Ouvrez une Pull Request.
-
-## Licence
-
-Ce projet est sous licence [MIT](https://opensource.org/licenses/MIT).
